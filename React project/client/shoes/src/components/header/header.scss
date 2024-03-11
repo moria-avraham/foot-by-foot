@@ -1,0 +1,22 @@
+header {
+    background: black;
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    a {
+        color: white;
+        margin: 5px;
+        align-items: center;
+        display: flex;
+        height: 50px;
+    }
+
+    .active {
+        border: white 2px solid;
+        border-radius: 25px;
+        padding: 7px;
+
+    }
+}

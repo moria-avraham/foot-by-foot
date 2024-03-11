@@ -1,0 +1,26 @@
+footer {
+    background-color: black;
+    color: white;
+    width: 100vw;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .about,
+    .CustomerService,
+    .Brands,
+    .DREAM_CARD {
+        text-align: center;
+    }
+
+    a {
+        margin: 5px;
+        flex-direction: column;
+        display: block;
+        color: white;
+        // justify-content: center;
+        // align-items: center;
+        text-align: center;
+    }
+}
