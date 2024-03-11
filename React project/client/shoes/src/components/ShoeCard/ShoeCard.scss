@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+
+    .card {
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border: rgba(128, 128, 128, 0.174) solid 3px;
+        width: 85vw;
+
+        .description {
+            background-color: red;
+            text-align: center;
+            width: 50%;
+        }
+
+        .imges {
+            background-color: aquamarine;
+            width: 50%;
+            margin-left: 50px;
+            display: block;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}

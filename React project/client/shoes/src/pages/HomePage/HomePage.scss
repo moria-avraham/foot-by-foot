@@ -1,6 +1,12 @@
-.home {
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(5, 250px);
-    gap: 1rem;
+body {
+    margin: 0;
+    box-sizing: border-box;
+
+    .home {
+        width: 85vw;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(5, 250px);
+        gap: 1rem;
+    }
 }
