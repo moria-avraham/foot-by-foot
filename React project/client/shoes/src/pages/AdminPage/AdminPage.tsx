@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { getAllProduct } from "../API/productApi"
-import { getAllUser } from "../API/userApi"
-import ShowProduct from "../components/ShowProduct/ShowProduct"
-import ShowUsers from "../components/ShowUsers/ShowUsers"
-import CreateProduct from "../components/CreateProduct/CreateProduct"
+import { getAllProduct } from "../../API/productApi"
+import { getAllUser } from "../../API/userApi"
+import ShowProduct from "../../components/ShowProduct/ShowProduct"
+import ShowUsers from "../../components/ShowUsers/ShowUsers"
+import CreateProduct from "../../components/CreateProduct/CreateProduct"
 
 const AdminPage = () => {
     const [users, setUsers] = useState([])
