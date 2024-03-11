@@ -34,7 +34,7 @@ const Register = () => {
         }
     }
     return (
-        <> <h1>foot and foot</h1>
+        <> <h1>foot by foot</h1>
             <form onSubmit={handleSubmit}>
                 <h2>Register</h2>
 

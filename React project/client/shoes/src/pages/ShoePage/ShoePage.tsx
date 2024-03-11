@@ -24,9 +24,6 @@ const ShoePage = () => {
     return (
         <>
             {chosenProduct?.map((product) => <ShoeCard product={product} />)}
-
-
-
         </>
     )
 }

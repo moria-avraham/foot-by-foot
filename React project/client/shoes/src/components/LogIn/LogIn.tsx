@@ -30,7 +30,7 @@ const LogIn = () => {
 
     return (
         <>
-            <h1>Welcome to foot and foot</h1>
+            <h1>Welcome to foot by foot</h1>
             <form onSubmit={handleSubmit}>
                 <h2>Log In</h2>
                 <p>email:</p><input type="email" onInput={(ev) => { setuserEmail((ev.target as HTMLInputElement).value) }} />

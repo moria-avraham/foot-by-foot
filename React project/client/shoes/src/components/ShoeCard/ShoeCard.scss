@@ -7,21 +7,37 @@ body {
         align-items: center;
         justify-content: space-around;
         border: rgba(128, 128, 128, 0.174) solid 3px;
-        width: 85vw;
+        width: 75vw;
+        height: 500px;
 
         .description {
-            background-color: red;
             text-align: center;
             width: 50%;
+
+            .img_description {
+                text-align: end;
+            }
         }
 
         .imges {
-            background-color: aquamarine;
             width: 50%;
             margin-left: 50px;
             display: block;
             align-items: center;
             justify-content: space-between;
+
+            .bigImg {
+
+                display: flex;
+                justify-content: center;
+            }
+
+            .imgBth {
+                display: flex;
+                align-items: center;
+                justify-content: end;
+
+            }
         }
     }
 }

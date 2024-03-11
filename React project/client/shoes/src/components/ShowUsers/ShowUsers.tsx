@@ -1,7 +1,7 @@
 import { FC, useState } from "react"
 import { deleteUser } from "../../API/userApi"
 import UpdateUser from "../UpdateUser/UpdateUser"
-
+import "./ShowUsers.scss"
 
 const ShowUsers: FC<UserProps> = ({ user }) => {
     const [selectedUser, setSelectedUser] = useState(false)
@@ -16,14 +16,19 @@ const ShowUsers: FC<UserProps> = ({ user }) => {
     }
     return (
         <div >
-            {user.user_id}
-            {user.user_full_name}
-            {user.user_email}
-            {user.user_phone}
-            {user.role}
 
-            <button onClick={() => handleDelete(Number(user.user_id))}>delete</button>
-            <button onClick={() => setSelectedUser(true)}>update</button>
+            <td> {user.user_id}</td>
+            <td>{user.user_full_name}</td>
+            <td>{user.user_email}</td>
+            <td> {user.user_phone}</td>
+            <td>{user.role}</td>
+            <td>
+                <button onClick={() => handleDelete(Number(user.user_id))}>delete</button>
+                <button onClick={() => setSelectedUser(true)}>update</button>
+            </td>
+
+
+
             {selectedUser ? <UpdateUser user={user} /> : false}
         </div>
     )
