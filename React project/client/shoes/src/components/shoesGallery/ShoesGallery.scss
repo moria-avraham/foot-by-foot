@@ -1,0 +1,22 @@
+.gallery {
+    border: rgba(128, 128, 128, 0.174) solid 0.5px;
+    text-align: center;
+    height: 300px;
+    margin: 0;
+
+
+    a {
+        color: black;
+        background-color: aqua;
+
+
+        .price {
+            display: flex;
+            text-align: start;
+            margin-top: 25px;
+            font-size: 12px;
+        }
+
+    }
+
+}

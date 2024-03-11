@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { getFilterProduct } from '../API/productApi';
-import ShoesGallery from '../components/shoesGallery/ShoesGallery';
+import { getFilterProduct } from '../../API/productApi';
+import ShoesGallery from '../../components/shoesGallery/ShoesGallery';
 
 const FilterPage = () => {
     const [filtered, setFiltered] = useState([])

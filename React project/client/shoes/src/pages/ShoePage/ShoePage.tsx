@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react"
-import ShoeCard from "../components/ShoeCard/ShoeCard"
+import ShoeCard from "../../components/ShoeCard/ShoeCard"
 import { useParams } from "react-router-dom"
-import { getProductById } from "../API/productApi";
+import { getProductById } from "../../API/productApi";
 
 
 
