@@ -37,12 +37,11 @@ const Register = () => {
         <> <h1>foot by foot</h1>
             <form onSubmit={handleSubmit}>
                 <h2>Register</h2>
-
                 <input type="text" placeholder='full nume' onInput={(ev) => { setFullName((ev.target as HTMLInputElement).value) }} />
                 <input type="email" placeholder='email' onInput={(ev) => { setUserEmail((ev.target as HTMLInputElement).value) }} />
                 <input type="number" placeholder='number' onInput={(ev) => { setphoneNumber(Number((ev.target as HTMLInputElement).value)) }} />
                 <input type="password" placeholder='new password' onInput={(ev) => { setpassword((ev.target as HTMLInputElement).value) }} />
-                {comments}
+                <div className="comments">{comments}</div>
                 <button type="submit">Register</button>
 
             </form>

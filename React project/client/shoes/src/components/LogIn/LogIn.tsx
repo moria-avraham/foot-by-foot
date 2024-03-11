@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { loginUser } from "../../API/userApi";
 import { Link } from "react-router-dom";
+import "./LogIn.scss"
 
 
 const LogIn = () => {
@@ -29,17 +30,19 @@ const LogIn = () => {
 
 
     return (
-        <>
+        <div className="login">
             <h1>Welcome to foot by foot</h1>
             <form onSubmit={handleSubmit}>
                 <h2>Log In</h2>
                 <p>email:</p><input type="email" onInput={(ev) => { setuserEmail((ev.target as HTMLInputElement).value) }} />
                 <p>password:</p><input type="password" onInput={(ev) => { setpassword((ev.target as HTMLInputElement).value) }} />
-                {comments}
+                <br />
+                <div className="comments">{comments}</div>
+                <br />
                 <button type="submit">Login</button>
                 <p>אם עדיין לא נרשמת הרשם <Link to={"/register"}>כאן</Link></p>
             </form>
-        </>
+        </div>
     )
 }
 
