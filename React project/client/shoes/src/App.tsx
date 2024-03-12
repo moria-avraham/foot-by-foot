@@ -10,6 +10,8 @@ import ShoePage from "./pages/ShoePage/ShoePage"
 import AboutPage from "./pages/info/AboutPage"
 import TermsOfUsePage from "./pages/info/TermsOfUsePage"
 import TermsPage from "./pages/info/TermsPage"
+import WishList from "./pages/WishList/WishList"
+import CartPage from "./pages/CartPage/CartPage"
 
 function App() {
 
@@ -21,6 +23,8 @@ function App() {
         <Routes >
           <Route path="/" element={<HomePage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/wish_list" element={<WishList />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/:id" element={<ShoePage />} />
           <Route path="/filter/:filter" element={<FilterPage />} />
           <Route path="/register" element={<Register />} />

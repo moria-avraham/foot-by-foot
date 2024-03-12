@@ -47,6 +47,7 @@ export async function getProductById(req: express.Request, res: express.Response
         connection.query(query, (err, results) => {
             try {
                 if (err) throw err;
+
                 res.send({ ok: true, results })
             } catch (error) {
                 console.error(error)
@@ -165,7 +166,6 @@ export async function updateProductById(req: express.Request, res: express.Respo
     }
 }
 
-
 export async function getSearch(req: express.Request, res: express.Response) {
     try {
         const { search } = req.params;
@@ -175,6 +175,49 @@ export async function getSearch(req: express.Request, res: express.Response) {
     INNER JOIN shoes_schema.product 
     ON shoes_schema.product.product_id = shoes_schema.images.product_id
     WHERE shoes_schema.product.consumer like '%${search}%' or shoes_schema.product.company like '%${search}%' or shoes_schema.product.product_name like '%${search}%' or shoes_schema.product.description like '%${search}%'; `;
+        connection.query(query, (err, results) => {
+            try {
+                if (err) throw err;
+                res.send({ ok: true, results })
+            } catch (error) {
+                console.error(error)
+                res.status(500).send({ ok: false, error })
+            }
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({ ok: false, error })
+    }
+}
+
+export async function getCartById(req: express.Request, res: express.Response) {
+    try {
+        const userID = req.params.userID;
+        if (!userID) throw new Error("no Id");
+        const query = `SELECT * FROM cart
+JOIN product ON product.product_id = cart.prouct_id
+JOIN images ON images.product_id = cart.prouct_id where cart.user_id=${userID}; `;
+        connection.query(query, (err, results) => {
+            try {
+                if (err) throw err;
+
+                res.send({ ok: true, results })
+            } catch (error) {
+                console.error(error)
+                res.status(500).send({ ok: false, error })
+            }
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({ ok: false, error })
+    }
+
+}
+export async function deleteFromCart(req: express.Request, res: express.Response) {
+    try {
+        const { cartID } = req.params;
+        if (!cartID) throw new Error("no id on deleteFromCart")
+        const query = `DELETE FROM cart WHERE cart_id = ${cartID};`;
         connection.query(query, (err, results) => {
             try {
                 if (err) throw err;
