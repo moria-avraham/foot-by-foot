@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+
+    .card {
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border: rgba(128, 128, 128, 0.174) solid 3px;
+        width: 75vw;
+        height: 500px;
+
+        .description {
+            text-align: center;
+            width: 50%;
+
+            .img_description {
+                text-align: end;
+            }
+        }
+
+        .imges {
+            width: 50%;
+            margin-left: 50px;
+            display: block;
+            align-items: center;
+            justify-content: space-between;
+
+            .bigImg {
+
+                display: flex;
+                justify-content: center;
+            }
+
+            .imgBth {
+                display: flex;
+                align-items: center;
+                justify-content: end;
+
+            }
+        }
+    }
+}

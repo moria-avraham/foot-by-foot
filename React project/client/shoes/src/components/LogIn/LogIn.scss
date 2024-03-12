@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+
+
+    .login {
+        background: url(../../boyImg/boy.png);
+        text-align: center;
+        margin: auto;
+        width: 80vw;
+
+
+        .comments {
+            color: red;
+        }
+
+        bottom {
+            margin: 20px;
+        }
+    }
+}

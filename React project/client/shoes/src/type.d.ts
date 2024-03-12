@@ -1,10 +1,10 @@
+
 interface ShoeCardProps {
     productID: number,
     img: string,
     productName: string,
     price: number
 }
-
 type shoe = {
     productName: string,
     productDescription: string,
@@ -21,10 +21,14 @@ type product = {
     consumer: string,
     description: string,
     product_name: string
-    left: string,
-    right: string,
+    left_shoe: string,
+    right_shoe: string,
     together: string,
     back: string
+
+}
+type productProps = {
+    product: product
 
 }
 
