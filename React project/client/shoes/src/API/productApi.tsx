@@ -90,3 +90,26 @@ export const SearchProduct = async (search: string) => {
         console.error(error)
     }
 }
+
+export const getUserCart = async (userID: number) => {
+    try {
+        if (!userID) throw new Error("Not id for getUserCart");
+        const response = await axios.get(`/api/product/get-Product-Cart/${userID}`
+        );
+        return response.data.results;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
+export const deleteFromCart = async (cartID: number) => {
+    try {
+        if (!cartID) throw new Error("No id in deleteFromCart ");
+        const response = await axios.delete(`/api/product/delete-from-cart/${cartID}`
+        );
+        return response.data;
+    } catch (error) {
+        console.error(error)
+    }
+}

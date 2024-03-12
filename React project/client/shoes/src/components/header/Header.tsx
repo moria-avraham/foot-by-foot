@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import './header.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons'
@@ -16,9 +16,12 @@ const Header = () => {
             <NavLink to={"filter/men"}>Men</NavLink>
             <NavLink to={"filter/women"}>Women</NavLink>
             <div>
+
                 <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: "white" }} /><Search />
-                <FontAwesomeIcon icon={faHeart} style={{ color: "white" }} />
-                <FontAwesomeIcon icon={faCartShopping} style={{ color: "white" }} />
+                <Link to={"/wish_list"}>
+                    <FontAwesomeIcon icon={faHeart} style={{ color: "white" }} /></Link>
+                <Link to={"/cart"}>
+                    <FontAwesomeIcon icon={faCartShopping} style={{ color: "white" }} /></Link>
             </div>
             <NavLink to={"login"}>התחבר/י</NavLink>
 
