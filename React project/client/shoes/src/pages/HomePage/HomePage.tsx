@@ -22,7 +22,7 @@ const homePage = () => {
 
     return (
         <div className="home">
-            {user.name}
+            {/* {user.name} */}
             {right?.map((right) => <ShoesGallery productID={right.product_id} img={right.right_shoe} productName={right.product_name
             } price={right.price} />)}</div>
     )

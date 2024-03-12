@@ -3,10 +3,13 @@ body {
     box-sizing: border-box;
 
     .home {
-        width: 85vw;
-        margin: auto;
+        width: 90vw;
+        margin: 100px;
         display: grid;
-        grid-template-columns: repeat(5, 250px);
+        grid-template-columns: repeat(6, 250px);
+        align-items: center;
+        justify-content: center;
         gap: 1rem;
+
     }
 }
