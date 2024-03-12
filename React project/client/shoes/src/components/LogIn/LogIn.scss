@@ -3,18 +3,36 @@ body {
 
 
     .login {
-        background: url(../../boyImg/boy.png);
-        text-align: center;
+        display: flex;
+        height: 35vw;
         margin: auto;
-        width: 80vw;
 
+        .img {
+            background: url(../../Photos/login.png) no-repeat center center/cover;
+            width: 40vw;
+            height: 35vw;
+        }
+
+
+        form {
+            display: block;
+            align-items: start;
+            justify-content: center;
+            margin: auto;
+            width: 50vw;
+        }
 
         .comments {
             color: red;
         }
 
-        bottom {
+        button {
             margin: 20px;
+            padding: 2px;
+            width: 20vh;
+            height: 30px;
+            background-color: black;
+            color: white;
         }
     }
 }

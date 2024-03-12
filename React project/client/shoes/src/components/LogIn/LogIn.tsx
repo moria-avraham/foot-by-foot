@@ -31,8 +31,9 @@ const LogIn = () => {
 
     return (
         <div className="login">
-            <h1>Welcome to foot by foot</h1>
+            <div className="img"></div>
             <form onSubmit={handleSubmit}>
+                <h1>Welcome to foot by foot</h1>
                 <h2>Log In</h2>
                 <p>email:</p><input type="email" onInput={(ev) => { setuserEmail((ev.target as HTMLInputElement).value) }} />
                 <p>password:</p><input type="password" onInput={(ev) => { setpassword((ev.target as HTMLInputElement).value) }} />

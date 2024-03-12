@@ -1,0 +1,26 @@
+.cart {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    padding: 30px;
+    margin: auto;
+    width: 150vh;
+    height: 150px;
+    border-top: rgba(128, 128, 128, 0.233) 2px solid;
+
+
+
+    .addCart {
+        background-color: black;
+        color: white;
+        width: 7vw;
+        height: 4ch;
+        padding: 3px;
+    }
+
+    button {
+        background-color: white;
+        height: 50px;
+        margin: 20px;
+    }
+}

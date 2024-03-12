@@ -34,8 +34,10 @@ const Register = () => {
         }
     }
     return (
-        <> <h1>foot by foot</h1>
+        <div className="register">
+            <div className="img"></div>
             <form onSubmit={handleSubmit}>
+                <h1>foot by foot</h1>
                 <h2>Register</h2>
                 <input type="text" placeholder='full nume' onInput={(ev) => { setFullName((ev.target as HTMLInputElement).value) }} />
                 <input type="email" placeholder='email' onInput={(ev) => { setUserEmail((ev.target as HTMLInputElement).value) }} />
@@ -45,7 +47,8 @@ const Register = () => {
                 <button type="submit">Register</button>
 
             </form>
-        </>
+        </div>
+
     )
 }
 

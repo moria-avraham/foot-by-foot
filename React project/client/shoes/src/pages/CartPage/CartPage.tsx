@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { deleteFromCart, getUserCart } from "../../API/productApi";
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./CartPage.scss"
 
 const CartPage = () => {
     const [cart, setCart] = useState([])
@@ -29,15 +30,21 @@ const CartPage = () => {
     useEffect(() => { getCart(1) }, [])
     return (
         <div>
+            <h1>עגלת קניות</h1>
             {cart.map((cart) => {
-                return <div>
+                return <div className="cart">
+
                     <button onClick={() => hendeleDelete(Number(cart.cart_id))}>
                         <FontAwesomeIcon icon={faTrashCan} />
                     </button>
-                    <img src={cart.right_shoe} width={100} />
+                    <button className="addCart">הוסף לסל</button>
+                    <div>
+                        <p>{cart.price}</p>
+                        <p>{cart.amount}</p>
+                    </div>
                     <p>{cart.product_name}</p>
-                    <p>{cart.price}</p>
-                    <p>{cart.amount}</p>
+
+                    <img src={cart.right_shoe} width={150} />
 
                 </div>
             }

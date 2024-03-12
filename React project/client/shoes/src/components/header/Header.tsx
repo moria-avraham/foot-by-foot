@@ -11,12 +11,18 @@ const Header = () => {
 
     return (
         <header>
-            <button >Brands</button>
-            <NavLink to={"filter/kids"}>Kids</NavLink>
-            <NavLink to={"filter/men"}>Men</NavLink>
-            <NavLink to={"filter/women"}>Women</NavLink>
-            <div>
-
+            <Link to={"/"} className="logo">foot by foot</Link>
+            <div className="options">
+                <a className="brands">Brands <div>
+                    <img src="https://www.icoupons.co.il/wp-content/uploads/2021/02/41241-480x480.jpg" />
+                    <img src="https://cdn.britannica.com/94/193794-050-0FB7060D/Adidas-logo.jpg" />
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtC3OuScEEsp0YXEjdmjC_pev9BxuBP72r8w&usqp=CAU" />
+                </div></a>
+                <NavLink to={"filter/kids"}>Kids</NavLink>
+                <NavLink to={"filter/men"}>Men</NavLink>
+                <NavLink to={"filter/women"}>Women</NavLink>
+            </div>
+            <div className="icons">
                 <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: "white" }} /><Search />
                 <Link to={"/wish_list"}>
                     <FontAwesomeIcon icon={faHeart} style={{ color: "white" }} /></Link>

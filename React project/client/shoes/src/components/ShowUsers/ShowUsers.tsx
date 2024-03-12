@@ -2,6 +2,9 @@ import { FC, useState } from "react"
 import { deleteUser } from "../../API/userApi"
 import UpdateUser from "../UpdateUser/UpdateUser"
 import "./ShowUsers.scss"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+
 
 const ShowUsers: FC<UserProps> = ({ user }) => {
     const [selectedUser, setSelectedUser] = useState(false)
@@ -23,7 +26,7 @@ const ShowUsers: FC<UserProps> = ({ user }) => {
             <td> {user.user_phone}</td>
             <td>{user.role}</td>
             <td>
-                <button onClick={() => handleDelete(Number(user.user_id))}>delete</button>
+                <button onClick={() => handleDelete(Number(user.user_id))}><FontAwesomeIcon icon={faTrashCan} /></button>
                 <button onClick={() => setSelectedUser(true)}>update</button>
             </td>
 

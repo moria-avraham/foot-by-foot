@@ -4,15 +4,43 @@ body {
     align-items: center;
     text-align: center;
 
-    form {
-        margin: 45px auto;
-        width: 80vw;
+    .register {
+        margin: auto;
+        width: 100vw;
+        height: 70ch;
+        display: flex;
 
-        .comments {
-            color: red;
+
+        .img {
+            width: 60vw;
+            height: 70ch;
+            background: url(../../Photos/register.jpg) no-repeat center center/cover;
         }
 
-        input {}
+        form {
+            display: block;
+            align-items: start;
+            justify-content: center;
+            width: 40vw;
+            margin: auto;
 
+            input {
+                display: block;
+                margin: 7px auto;
+            }
+
+            .comments {
+                color: red;
+            }
+
+            button {
+                margin-top: 10px;
+                background-color: black;
+                color: white;
+                padding: 1px;
+                height: 25px;
+                width: 9vw;
+            }
+        }
     }
 }
