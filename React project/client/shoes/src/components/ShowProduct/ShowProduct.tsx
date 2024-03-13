@@ -1,6 +1,8 @@
 import { FC, useState } from "react"
 import { deleteProcuct } from "../../API/productApi"
 import UpdateProduct from "../UpdateProduct/UpdateProduct"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
 interface ShoeCardProp {
     product: product
@@ -19,21 +21,22 @@ const ShowProduct: FC<ShoeCardProp> = ({ product }) => {
     }
     return (
         <div >
-            {product.product_id}
-            <br />
-            {product.company}
-            <br />
-            {product.price}
-            <br />
-            {product.consumer}
-            <br />
-            {product.description}
-            <br />
-            {product.product_name}
-            <button onClick={() => handleDelete(Number(product.product_id))}>delete</button>
-            <button onClick={() => setSelectedProduct(true)}>update</button>
+            <td> {product.product_id}</td>
+            <td>{product.price}</td>
+            <td> {product.consumer}</td>
+            <td>{product.company}</td>
+            <td>{product.description}</td>
+            <td>{product.product_name}</td>
+            <td><img src={product.right_shoe} /></td>
+
+            <td>
+                <button onClick={() => handleDelete(Number(product.product_id))}><FontAwesomeIcon icon={faTrashCan} /></button>
+                <button onClick={() => setSelectedProduct(true)}><FontAwesomeIcon icon={faPenToSquare} /></button>
+            </td>
+
             {selectedProduct ? <UpdateProduct product={product} /> : false}
-        </div >
+        </div>
+
     )
 }
 

@@ -34,21 +34,39 @@ const AdminPage = () => {
     }
     useEffect(() => { getData() }, [])
     return (
-        <div>
-            {products.map((product) => <ShowProduct product={product} />)}
-            <table>
+        <div className="admin">
+            <thead>
                 <tr>
-                    <td >user ID</td>
-                    <td>user name</td>
-                    <td>user emeil</td>
-                    <td>user phone</td>
-                    <td>role</td>
-                    <tr></tr>
+                    <th >user ID</th>
+                    <th>user name</th>
+                    <th>user emeil</th>
+                    <th>user phone</th>
+                    <th>role</th>
+                    <th></th>
                 </tr>
+            </ thead>
+            <table>
                 <tr>
                     {users.map((user) => <ShowUsers user={user} />)}
                 </tr>
 
+            </table>
+
+            <thead>
+                <tr>
+                    <th className="product" >product ID</th>
+                    <th className="product" >price</th>
+                    <th className="product" >company product </th>
+                    <th className="product" >consumer</th>
+                    <th className="product" >description</th>
+                    <th className="product" >Product name</th>
+                    <th className="product" >Product image</th>
+                </tr>
+            </ thead>
+            <table>
+                <tr>
+                    {products.map((product) => <ShowProduct product={product} />)}
+                </tr>
             </table>
 
         </div>

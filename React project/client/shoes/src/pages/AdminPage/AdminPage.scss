@@ -1,17 +1,24 @@
-th {
+.admin {
+    margin: 95px auto;
 
-    width: 10vw;
-}
-
-table {
-    margin: 20px;
-    border-collapse: collapse;
-
-    td {
-        border-top: 1px solid black;
-        height: -0.5px;
-        width: 10vw;
-        padding: 0;
+    th {
+        width: 10.5vw;
     }
 
+    table {
+
+        margin: 40px;
+        border-collapse: collapse;
+
+        td {
+            border-top: 1px solid black;
+            height: -0.5px;
+            width: 10vw;
+
+            img {
+                padding: 10px;
+                width: 60px;
+            }
+        }
+    }
 }
