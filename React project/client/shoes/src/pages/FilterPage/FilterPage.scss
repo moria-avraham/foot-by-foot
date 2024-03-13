@@ -1,0 +1,9 @@
+ .filter {
+     width: 90vw;
+     margin: 100px;
+     display: grid;
+     grid-template-columns: repeat(6, 250px);
+     align-items: center;
+     justify-content: center;
+     gap: 1rem;
+ }

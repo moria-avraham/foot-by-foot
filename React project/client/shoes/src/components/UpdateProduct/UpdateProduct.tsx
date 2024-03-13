@@ -9,8 +9,8 @@ const UpdateProduct: FC<props> = ({ product }) => {
     const [consumer, setConsumer] = useState((product.consumer));
     const [name, setName] = useState((product.product_name));
     const [description, setDescription] = useState((product.description));
-    const [right, setRight] = useState((product.right));
-    const [left, setLeft] = useState(product.left);
+    const [right, setRight] = useState((product.right_shoe));
+    const [left, setLeft] = useState(product.left_shoe);
     const [together, setTogether] = useState((product.together));
     const [back, setBack] = useState(product.back);
 

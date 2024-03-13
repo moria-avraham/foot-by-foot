@@ -23,10 +23,10 @@ const AdminPage = () => {
         try {
             const data = await getAllUser()
             setUsers(data)
-            // const results = await getAllProduct()
-            // setProduct(results)
-            const results = await getcookie()
-            console.log(results)
+            const results = await getAllProduct()
+            setProduct(results)
+            // const results = await getcookie()
+            // console.log(results)
 
         } catch (error) {
             console.error(error)
@@ -34,8 +34,7 @@ const AdminPage = () => {
     }
     useEffect(() => { getData() }, [])
     return (
-        <div>
-            {products.map((product) => <ShowProduct product={product} />)}
+        <div className="admin">
             <thead>
                 <tr>
                     <th >user ID</th>
@@ -52,7 +51,24 @@ const AdminPage = () => {
                 </tr>
 
             </table>
-            <CreateProduct />
+
+            <thead>
+                <tr>
+                    <th className="product" >product ID</th>
+                    <th className="product" >price</th>
+                    <th className="product" >company product </th>
+                    <th className="product" >consumer</th>
+                    <th className="product" >description</th>
+                    <th className="product" >Product name</th>
+                    <th className="product" >Product image</th>
+                </tr>
+            </ thead>
+            <table>
+                <tr>
+                    {products.map((product) => <ShowProduct product={product} />)}
+                </tr>
+            </table>
+
         </div>
     )
 }
