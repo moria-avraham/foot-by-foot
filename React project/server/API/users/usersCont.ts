@@ -23,34 +23,81 @@ export async function getAllUsers(req: express.Request, res: express.Response) {
         res.status(500).send({ ok: false, error })
     }
 }
+
+export function getUserFromToken(req: express.Request, res: express.Response) {
+    try {
+        const secret = process.env.SECRET;
+        if (!secret) throw new Error("Secret not defined");
+
+        const token = req.cookies?.token;
+
+        if (!token) {
+            res.status(401).send({ ok: false, message: 'Token not provided' });
+            return;
+        }
+
+        const payload = jwt.decode(token, secret);
+
+        if (!payload) {
+            res.status(401).send({ ok: false, message: 'Invalid token' });
+            return;
+        }
+
+        const userId = (payload as any).userId;
+
+        const userQuery = `SELECT * FROM users WHERE id = ?`;
+
+        connection.query(userQuery, [userId], (err, results) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send({ ok: false, error: err });
+                return;
+            }
+
+            if (!Array.isArray(results) || results.length === 0) {
+                res.status(401).send({ ok: false, message: 'User not found' });
+                return;
+            }
+
+            const user = results[0] as RowDataPacket;
+            res.status(200).send({ ok: true, user });
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ ok: false, error: error.message });
+    }
+}
+
+
+
 //לבדוקקקקקקקק
-// export async function getUserByCookie(req, res) {
-//     try {
-//         const { user } = req.cookies;
+export async function getUserByCookie(req, res) {
+    try {
+        const { user } = req.cookies;
 
-//         const secret = process.env.SECRET
-//         if (!secret) throw new Error("no secret")
+        const secret = process.env.SECRET
+        if (!secret) throw new Error("no secret")
 
-//         const decodedId = jwt.decode(user, secret)
-//         const { userID } = decodedId;
+        const decodedId = jwt.decode(user, secret)
+        const { userID } = decodedId;
 
 
-//         const query = `SELECT * FROM users WHERE user_id = ${userID}`;
+        const query = `SELECT * FROM users WHERE user_id = ${userID}`;
 
-//         connection.query(query, (err, results) => {
-//             try {
-//                 if (err) throw err;
+        connection.query(query, (err, results) => {
+            try {
+                if (err) throw err;
+                console.log(results)
+                res.send({ ok: true, results: results[0] })
+            } catch (error) {
+                res.status(500).send({ ok: false, error })
+            }
+        })
 
-//                 res.send({ ok: true, results: results[0] })
-//             } catch (error) {
-//                 res.status(500).send({ ok: false, error })
-//             }
-//         })
-
-//     } catch (error) {
-//         res.status(500).send({ ok: false, error })
-//     }
-// }
+    } catch (error) {
+        res.status(500).send({ ok: false, error })
+    }
+}
 
 export async function createUser(req: express.Request, res: express.Response) {
     try {
@@ -74,38 +121,6 @@ export async function createUser(req: express.Request, res: express.Response) {
         res.status(500).send({ ok: false, error })
     }
 }
-
-
-// export function logIn(req: express.Request, res: express.Response) {
-//     try {
-//         const { email, password } = req.body;
-//         if (!email || !password) throw new Error("Please complete all fields in logIn at FILE userCont");
-
-//         // const cookie={userId}
-//         const query = `SELECT * FROM users WHERE user_email = ? AND user_password = ?`;
-
-//         connection.query(query, [email, password], (err, results) => {
-//             if (err) {
-//                 console.error(err);
-//                 res.status(500).send({ ok: false, error: err });
-//                 return;
-//             }
-
-//             if (!Array.isArray(results) || results.length === 0) {
-//                 res.status(401).send({ ok: false, message: 'Invalid credentials' });
-//                 return;
-//             }
-
-//             const user = results[0] as RowDataPacket;
-//             res.status(200).send({ ok: true, message: 'Login successful', user });
-//         });
-
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send({ ok: false, error });
-//     }
-// }
-
 
 export function logIn(req: express.Request, res: express.Response) {
     try {
