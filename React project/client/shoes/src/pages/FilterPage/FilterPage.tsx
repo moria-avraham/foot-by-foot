@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getFilterProduct } from '../../API/productApi';
 import ShoesGallery from '../../components/shoesGallery/ShoesGallery';
+import "./FilterPage.scss"
 
 const FilterPage = () => {
     const [filtered, setFiltered] = useState([])
@@ -20,7 +21,7 @@ const FilterPage = () => {
     }
     useEffect(() => { handleClick(filter) }, [filter]);
     return (
-        <div>
+        <div className='filter'>
             {filtered?.map((filter) => <ShoesGallery productID={filter.product_id} img={filter.right_shoe} productName={filter.product_name
             } price={filter.price} />)}
         </div>

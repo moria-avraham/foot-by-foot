@@ -1,15 +1,16 @@
+th {
+
+    width: 10vw;
+}
+
 table {
-    // width: 50%;
+    margin: 20px;
     border-collapse: collapse;
 
-    th {
-        background-color: red;
-    }
-
     td {
-        border-bottom: 1px solid black;
+        border-top: 1px solid black;
         height: -0.5px;
-        width: 10%;
+        width: 10vw;
         padding: 0;
     }
 

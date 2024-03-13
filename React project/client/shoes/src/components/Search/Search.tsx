@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { SearchProduct } from "../../API/productApi"
+import "./Search.scss"
 
 export const Search = () => {
     const [search, setSearch] = useState("")
@@ -23,8 +24,12 @@ export const Search = () => {
 
 
     return (
-        <div><input type="text" placeholder='Search' onInput={(ev) => setSearch((ev.target as HTMLInputElement).value)} />
-            {filterSearch ? <div className="search">{filterSearch.map((filter) => filter.back)}</div> : null}
+        <div><input className="input_search" type="text" placeholder='Search' onInput={(ev) => setSearch((ev.target as HTMLInputElement).value)} />
+            {filterSearch ? <div className="search">{filterSearch.map((filter) => <div className="search_info">
+                <p>{filter.price}</p>
+                <p>{filter.product_name}</p>
+                <img src={filter.right_shoe} />
+            </div>)}</div> : null}
         </div>
     )
 }

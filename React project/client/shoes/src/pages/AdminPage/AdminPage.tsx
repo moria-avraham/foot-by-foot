@@ -23,10 +23,10 @@ const AdminPage = () => {
         try {
             const data = await getAllUser()
             setUsers(data)
-            // const results = await getAllProduct()
-            // setProduct(results)
-            const results = await getcookie()
-            console.log(results)
+            const results = await getAllProduct()
+            setProduct(results)
+            // const results = await getcookie()
+            // console.log(results)
 
         } catch (error) {
             console.error(error)
@@ -36,23 +36,21 @@ const AdminPage = () => {
     return (
         <div>
             {products.map((product) => <ShowProduct product={product} />)}
-            <thead>
-                <tr>
-                    <th >user ID</th>
-                    <th>user name</th>
-                    <th>user emeil</th>
-                    <th>user phone</th>
-                    <th>role</th>
-                    <th></th>
-                </tr>
-            </ thead>
             <table>
+                <tr>
+                    <td >user ID</td>
+                    <td>user name</td>
+                    <td>user emeil</td>
+                    <td>user phone</td>
+                    <td>role</td>
+                    <tr></tr>
+                </tr>
                 <tr>
                     {users.map((user) => <ShowUsers user={user} />)}
                 </tr>
 
             </table>
-            <CreateProduct />
+
         </div>
     )
 }

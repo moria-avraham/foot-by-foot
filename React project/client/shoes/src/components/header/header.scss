@@ -38,22 +38,41 @@ header {
         }
 
         .brands:hover {
-            display: block;
-            background-color: white;
-            width: 30vh;
-            position: relative;
-            top: 40px;
-        }
+            .brands_img {
 
-        .icons {
-            width: 10vw;
-            height: 10px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background-color: red;
+                display: flex;
+                background-color: rgba(172, 169, 162, 0.852);
+                width: 40vh;
+                height: 13ch;
+                position: absolute;
+                top: 70px;
+                justify-content: space-between;
+                align-items: center;
+
+                img {
+                    width: 100px;
+                    height: 100px;
+                    display: flex;
+                }
+            }
         }
     }
+
+    .icons {
+        width: 13vw;
+        height: 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .MagnifyingGlass {
+            height: 18px;
+            padding: 3px;
+            color: black;
+            background: white;
+        }
+    }
+
 
     a {
         color: white;

@@ -1,0 +1,26 @@
+input.input_search {
+    height: 20px;
+}
+
+.search {
+    background-color: white;
+    position: absolute;
+    top: 60px;
+    right: 365px;
+    border: black solid 1px;
+
+    .search_info {
+        text-align: center;
+        border-bottom: black solid 1px;
+        width: 25vw;
+        height: 15ch;
+        display: flex;
+        justify-content: space-around;
+
+        img {
+            width: 80px;
+            height: 95px;
+        }
+    }
+
+}
