@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { loginUser } from "../../API/userApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./LogIn.scss"
+import { useAppDispatch } from "../../app/hooks";
+import { getUserApi } from "../../features/userAPI";
 
 
 const LogIn = () => {
-    // const navigate = useNavigate()
-
+    const navigate = useNavigate()
     const [email, setuserEmail] = useState<string>("");
     const [password, setpassword] = useState<string>("");
     const [comments, setComments] = useState("");
@@ -16,7 +17,11 @@ const LogIn = () => {
             ev.preventDefault();
             if (email && password) {
                 const data = await loginUser(email, password)
-                console.log(data?.data.ok)
+                if (data?.data.user.role == "client") {
+                    navigate("/")
+                } else if (data?.data.user.role == "admin") {
+                    navigate("/admin")
+                }
                 if (data?.response.status == 401) {
                     setComments("Pleas")
                 }

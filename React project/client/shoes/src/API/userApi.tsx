@@ -10,6 +10,16 @@ export const getAllUser = async () => {
     }
 }
 
+export const getcookie = async () => {
+    try {
+        const { data } = await axios.get(`api/users/get-by-cookie`)
+        if (data) return data.results;
+        else return;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export const createUser = async (userEmail: string, password: string, fullName: string, phoneNumber: number) => {
     try {
         if (!userEmail || !password || !fullName || !phoneNumber) throw new Error("Not enough data for register");
