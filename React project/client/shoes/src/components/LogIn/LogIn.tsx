@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { loginUser } from "../../API/userApi";
+import { getLoginUser, loginUser } from "../../API/userApi";
 import { Link, useNavigate } from "react-router-dom";
 import "./LogIn.scss"
 import { useAppDispatch } from "../../app/hooks";
@@ -17,14 +17,17 @@ const LogIn = () => {
             ev.preventDefault();
             if (email && password) {
                 const data = await loginUser(email, password)
-                if (data?.data.user.role == "client") {
-                    navigate("/")
-                } else if (data?.data.user.role == "admin") {
-                    navigate("/admin")
-                }
-                if (data?.response.status == 401) {
-                    setComments("Pleas")
-                }
+                console.log(data)
+                // if (data?.data.user.role == "client") {
+                //     navigate("/")
+                // } else if (data?.data.user.role == "admin") {
+                //     navigate("/admin")
+                // }
+                // if (data?.response.status == 401) {
+                //     setComments("Pleas")
+                // }
+                const results = await getLoginUser()
+                console.log(results)
             } else {
                 setComments("Please fill out all the necessary fields")
             }

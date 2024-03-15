@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const getAllUser = async () => {
     try {
         const { data } = await axios.get(`api/users/get-all-users`)
@@ -10,11 +11,10 @@ export const getAllUser = async () => {
     }
 }
 
-export const getcookie = async () => {
+export const getLoginUser = async () => {
     try {
-        const { data } = await axios.get(`api/users/get-by-cookie`)
-        if (data) return data.results;
-        else return;
+        return await axios.get(`api/users/get-by-cookie`)
+
     } catch (error) {
         console.error(error);
     }

@@ -2,7 +2,9 @@ import express from "express";
 import connection from "../../DB/database";
 import { RowDataPacket } from 'mysql2';
 import bcrypt from 'bcrypt';
-import jwt from 'jwt-simple';
+import jwt from "jsonwebtoken";
+require("dotenv").config()
+
 
 const saltRounds = 10;
 
@@ -36,7 +38,7 @@ export function getUserFromToken(req: express.Request, res: express.Response) {
             return;
         }
 
-        const payload = jwt.decode(token, secret);
+        const payload = jwt.verify(token, secret);
 
         if (!payload) {
             res.status(401).send({ ok: false, message: 'Invalid token' });
@@ -45,7 +47,7 @@ export function getUserFromToken(req: express.Request, res: express.Response) {
 
         const userId = (payload as any).userId;
 
-        const userQuery = `SELECT * FROM users WHERE id = ?`;
+        const userQuery = `SELECT * FROM users WHERE user_id = ?`;
 
         connection.query(userQuery, [userId], (err, results) => {
             if (err) {
@@ -54,10 +56,10 @@ export function getUserFromToken(req: express.Request, res: express.Response) {
                 return;
             }
 
-            if (!Array.isArray(results) || results.length === 0) {
-                res.status(401).send({ ok: false, message: 'User not found' });
-                return;
-            }
+            // if (!Array.isArray(results) || results.length === 0) {
+            //     res.status(401).send({ ok: false, message: 'User not found' });
+            //     return;
+            // }
 
             const user = results[0] as RowDataPacket;
             res.status(200).send({ ok: true, user });
@@ -70,34 +72,35 @@ export function getUserFromToken(req: express.Request, res: express.Response) {
 
 
 
+
 //לבדוקקקקקקקק
-export async function getUserByCookie(req, res) {
-    try {
-        const { user } = req.cookies;
+// export async function getUserByCookie(req, res) {
+//     try {
+//         const { user } = req.cookies;
 
-        const secret = process.env.SECRET
-        if (!secret) throw new Error("no secret")
+//         const secret = process.env.SECRET
+//         if (!secret) throw new Error("no secret")
 
-        const decodedId = jwt.decode(user, secret)
-        const { userID } = decodedId;
+//         const decodedId = jwt.decode(user, secret)
+//         const { userID } = decodedId;
 
 
-        const query = `SELECT * FROM users WHERE user_id = ${userID}`;
+//         const query = `SELECT * FROM users WHERE user_id = ${userID}`;
 
-        connection.query(query, (err, results) => {
-            try {
-                if (err) throw err;
-                console.log(results)
-                res.send({ ok: true, results: results[0] })
-            } catch (error) {
-                res.status(500).send({ ok: false, error })
-            }
-        })
+//         connection.query(query, (err, results) => {
+//             try {
+//                 if (err) throw err;
+//                 console.log(results)
+//                 res.send({ ok: true, results: results[0] })
+//             } catch (error) {
+//                 res.status(500).send({ ok: false, error })
+//             }
+//         })
 
-    } catch (error) {
-        res.status(500).send({ ok: false, error })
-    }
-}
+//     } catch (error) {
+//         res.status(500).send({ ok: false, error })
+//     }
+// }
 
 export async function createUser(req: express.Request, res: express.Response) {
     try {
@@ -125,7 +128,11 @@ export async function createUser(req: express.Request, res: express.Response) {
 export function logIn(req: express.Request, res: express.Response) {
     try {
         const { email, password } = req.body;
-        if (!email || !password) throw new Error("Please complete all fields in logIn at FILE userCont");
+        if (!email || !password) {
+            res.status(400).send({
+                ok: false, error: " missing fields in logIn function"
+            })
+        }
 
         const secret = process.env.SECRET;
         if (!secret) throw new Error("Secret not defined");
@@ -142,17 +149,20 @@ export function logIn(req: express.Request, res: express.Response) {
             if (!Array.isArray(results) || results.length === 0) {
                 res.status(401).send({ ok: false, message: 'Invalid credentials' });
                 return;
+            } else {
+
+                const user = results[0] as RowDataPacket;
+
+                const payload = { user_id: user.userid };
+                const token = jwt.sign(payload, secret);
+
+
+                res.cookie('token', token, { httpOnly: true, maxAge: 3600000 });
+                res.status(200).send({ ok: true, message: 'Login successful', user });
             }
 
-            const user = results[0] as RowDataPacket;
 
 
-            const payload = { userId: user.id, email: user.user_email };
-            const token = jwt.encode(payload, secret);
-
-
-            res.cookie('token', token, { httpOnly: true, maxAge: 3600000 });
-            res.status(200).send({ ok: true, message: 'Login successful', user });
         });
 
     } catch (error) {
@@ -160,6 +170,42 @@ export function logIn(req: express.Request, res: express.Response) {
         res.status(500).send({ ok: false, error: error.message });
     }
 }
+
+
+// export const getUserFromToken = async (req: express.Request, res: express.Response
+// ) => {
+//     try {
+//         const token = req.cookies.token;
+//         if (!token) {
+//             res.send({ ok: true, user: null });
+//             return;
+//         }
+//         const secret = process.env.SECRET;
+//         if (!secret) {
+//             throw new Error("No secret key available");
+//         }
+
+//         const decoded = jwt.verify(token, secret) as { user_id: number };
+//         const { user_id } = decoded;
+//         const query = `SELECT * FROM users WHERE user_id = ?;`;
+//         connection.query(
+//             query, [user_id],
+//             (err, results: RowDataPacket[], fields) => {
+//                 try {
+//                     if (err) throw err;
+//                     const user = results[0] as RowDataPacket;
+//                     res.send({ ok: true, user });
+//                 } catch (error) {
+//                     console.error(error);
+//                     res.status(500).send({ ok: false, error });
+//                 }
+//             }
+//         );
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send({ ok: false, error });
+//     }
+// };
 
 export function deleteUserById(req: express.Request, res: express.Response) {
     try {
