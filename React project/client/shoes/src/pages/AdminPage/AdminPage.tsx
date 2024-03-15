@@ -8,12 +8,17 @@ import "./AdminPage.scss"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { getUserApi } from "../../features/userAPI"
 import { userSelector } from "../../features/userSlice"
+import CreateUser from "../../components/CreateUser/CreateUser"
 
 const AdminPage = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(userSelector)
     const [users, setUsers] = useState([])
     const [products, setProduct] = useState([])
+    const [createUser, setCreateUser] = useState(false)
+    const [createProduct, setCreateProduct] = useState(false)
+
+
 
     useEffect(() => {
         dispatch(getUserApi())
@@ -35,6 +40,8 @@ const AdminPage = () => {
     useEffect(() => { getData() }, [])
     return (
         <div className="admin">
+            <button className="create" onClick={() => setCreateUser(true)}>create a new User</button>
+            {createUser ? <CreateUser /> : null}
             <thead>
                 <tr>
                     <th >user ID</th>
@@ -51,7 +58,8 @@ const AdminPage = () => {
                 </tr>
 
             </table>
-
+            <button className="create" onClick={() => setCreateProduct(true)}>create a new Product</button>
+            {createProduct ? <CreateProduct /> : null}
             <thead>
                 <tr>
                     <th className="product" >product ID</th>
