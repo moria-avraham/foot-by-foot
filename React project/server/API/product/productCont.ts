@@ -213,11 +213,75 @@ JOIN images ON images.product_id = cart.prouct_id where cart.user_id=${userID}; 
     }
 
 }
+
 export async function deleteFromCart(req: express.Request, res: express.Response) {
     try {
         const { cartID } = req.params;
         if (!cartID) throw new Error("no id on deleteFromCart")
         const query = `DELETE FROM cart WHERE cart_id = ${cartID};`;
+        connection.query(query, (err, results) => {
+            try {
+                if (err) throw err;
+                res.send({ ok: true, results })
+            } catch (error) {
+                console.error(error)
+                res.status(500).send({ ok: false, error })
+            }
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({ ok: false, error })
+    }
+}
+
+export async function getWishList(req: express.Request, res: express.Response) {
+    try {
+        const userID = req.params.userID;
+        if (!userID) throw new Error("no Id");
+        const query = `SELECT * FROM wish_list
+JOIN product ON product.product_id = wish_list.product_id
+JOIN images ON images.product_id = wish_list.product_id where wish_list.user_id=${userID};`;
+        connection.query(query, (err, results) => {
+            try {
+                if (err) throw err;
+                res.send({ ok: true, results })
+            } catch (error) {
+                console.error(error)
+                res.status(500).send({ ok: false, error })
+            }
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({ ok: false, error })
+    }
+}
+
+export async function addWishList(req: express.Request, res: express.Response) {
+    try {
+        const { productID, userID } = req.body;
+        if (!userID || !productID) throw new Error("no Id");
+        const query = `INSERT INTO shoes_schema.wish_list(product_id, user_id) VALUES ('${productID}', '${userID}');`;
+        connection.query(query, (err, results) => {
+            try {
+                if (err) throw err;
+                res.send({ ok: true, results })
+            } catch (error) {
+                console.error(error)
+                res.status(500).send({ ok: false, error })
+            }
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({ ok: false, error })
+    }
+}
+
+export async function deleteFromWishList(req: express.Request, res: express.Response) {
+    try {
+        const { wishListID } = req.params;
+
+        if (!wishListID) throw new Error("no id on deleteFromCart")
+        const query = `DELETE FROM wish_list WHERE wish_list.id = ${wishListID};`;
         connection.query(query, (err, results) => {
             try {
                 if (err) throw err;

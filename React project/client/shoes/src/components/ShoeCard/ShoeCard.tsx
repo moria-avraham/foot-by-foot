@@ -2,11 +2,19 @@ import { FC, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import "./ShoeCard.scss"
+import { addToWishList } from "../../API/productApi"
 
 
 const ShoeCard: FC<productProps> = ({ product }) => {
-
     const [selectedImage, setSelectedImage] = useState<string | undefined>((product.right_shoe))
+    const handleClick = async (productID: number) => {
+        try {
+            const data = await addToWishList(productID, 1)
+            console.log(data)
+        } catch (error) {
+            console.error(error)
+        }
+    }
     return (
         <div className="card">
             <div className="description">
@@ -23,7 +31,7 @@ const ShoeCard: FC<productProps> = ({ product }) => {
             </div>
             <div className="imges">
                 <div className="bigImg" >
-                    <FontAwesomeIcon icon={faHeart} />
+                    <button onClick={() => handleClick(product.product_id)}><FontAwesomeIcon icon={faHeart} /></button>
                     <img width={250} src={selectedImage} />
                 </div>
                 <div className="imgBth">
