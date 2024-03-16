@@ -113,3 +113,33 @@ export const deleteFromCart = async (cartID: number) => {
         console.error(error)
     }
 }
+
+
+export const getWishListProduct = async (userID: number) => {
+    try {
+        const { data } = await axios.get(`api/product/get-wish-list/${userID}`)
+        return data.results;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const addToWishList = async (productID: number, userID: number) => {
+    try {
+        return await axios.post("api/product/add-wish-list", { productID, userID })
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+export const deleteWishList = async (wishListID: number) => {
+    try {
+        if (!wishListID) throw new Error("No id in deleteFromCart ");
+        const response = await axios.delete(`/api/product/delete-from-wish_list/${wishListID}`
+        );
+        return response.data;
+    } catch (error) {
+        console.error(error)
+    }
+}
