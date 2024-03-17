@@ -14,7 +14,6 @@ const ShoePage = () => {
         try {
             const data = await getProductById(id)
             setChosenProduct(data)
-
         } catch (error) {
             console.error(error)
         }

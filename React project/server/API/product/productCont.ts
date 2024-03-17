@@ -60,6 +60,27 @@ export async function getProductById(req: express.Request, res: express.Response
     }
 }
 
+export async function getSizeByIdProduct(req: express.Request, res: express.Response) {
+    try {
+        const id = req.params.id;
+        if (!id) throw new Error("no Id");
+        const query = `SELECT * FROM shoes_schema.sizes where sizes.product_id=${id};`;
+        connection.query(query, (err, results) => {
+            try {
+                if (err) throw err;
+
+                res.send({ ok: true, results })
+            } catch (error) {
+                console.error(error)
+                res.status(500).send({ ok: false, error })
+            }
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({ ok: false, error })
+    }
+}
+
 export async function getProductFilter(req: express.Request, res: express.Response) {
     try {
         const filter = req.params.filter;
@@ -88,7 +109,7 @@ export async function createProduct(req: express.Request, res: express.Response)
     try {
 
         const { company, price, consumer, name, description, right, left, together, back } = req.body;
-
+        if (!company || !price || !consumer || !name || !description || !right || !left || !together || !back) throw new Error("no ");
 
         const query = `INSERT INTO product (company, price, consumer, product_name,description) VALUES ('${company}','${price}','${consumer}','${name}','${description}');`;
         connection.query(query, (err, results) => {
@@ -150,7 +171,7 @@ export async function updateProductById(req: express.Request, res: express.Respo
         if (!productID) throw new Error("no id user");
         const { company, price, consumer, name, description, right, left, together, back, } = req.body;
         if (!company || !price || !consumer || !name || !description || !right || !left || !together || !back) throw new Error("no field or update ");
-        const query = `UPDATE product, images SET product.company = '${company}', product.price = '${price}' , product.consumer = '${consumer}' , product.product_name = '${name}' , product.description = '${description}' , images.right_shoe = '${right}' , images.left_shoe = '${left}' , images.together = '${together}' , images.back = '${back}' WHERE product.product_id = images.product_id AND product.product_id='${productID}';`;
+        const query = `UPDATE product, images  SET product.company = '${company}', product.price = '${price}' , product.consumer = '${consumer}' , product.product_name = '${name}' , product.description = '${description}' , images.right_shoe = '${right}' , images.left_shoe = '${left}' , images.together = '${together}' , images.back = '${back}' WHERE product.product_id = images.product_id AND product.product_id='${productID}';`;
         connection.query(query, (err, results) => {
             try {
                 if (err) throw err;
@@ -295,4 +316,25 @@ export async function deleteFromWishList(req: express.Request, res: express.Resp
         console.error(error)
         res.status(500).send({ ok: false, error })
     }
+}
+
+export async function createCart(req: express.Request, res: express.Response) {
+    try {
+        const { productID, userID, size } = req.body;
+        if (!productID || !userID || !size) throw new Error("no ");
+        const query = `INSERT INTO cart (prouct_id, user_id ,size) VALUES ('${productID}', '${userID}', '${size}');`;
+        connection.query(query, (err, results) => {
+            try {
+                if (err) throw err;
+                res.send({ ok: true, results })
+            } catch (error) {
+                console.error(error)
+                res.status(500).send({ ok: false, error })
+            }
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({ ok: false, error })
+    }
+
 }

@@ -3,19 +3,37 @@ body {
 
     .card {
         margin: auto;
+        margin-top: 70px;
         display: flex;
         align-items: center;
         justify-content: space-around;
         border: rgba(128, 128, 128, 0.174) solid 3px;
-        width: 75vw;
-        height: 500px;
+        width: 65vw;
+        height: 550px;
 
         .description {
             text-align: center;
             width: 50%;
 
+
+
             .img_description {
                 text-align: end;
+            }
+
+            .sizes {
+                display: flex;
+                justify-content: end;
+
+                .size {
+                    display: block;
+                    background-color: rgba(128, 128, 128, 0.098);
+                    color: rgb(79, 79, 79);
+                    text-align: center;
+                    width: 30px;
+                    height: 30px;
+                    margin: 5px;
+                }
             }
         }
 
@@ -38,10 +56,7 @@ body {
                     right: 7vh;
                 }
 
-                //     .heart:hover
-                //     {
-                //     border: none;
-                // }
+
             }
 
             .imgBth {
