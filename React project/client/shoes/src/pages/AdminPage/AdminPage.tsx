@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllProduct } from "../../API/productApi"
-import { getAllUser, getcookie } from "../../API/userApi"
+import { getAllUser } from "../../API/userApi"
 import ShowProduct from "../../components/ShowProduct/ShowProduct"
 import ShowUsers from "../../components/ShowUsers/ShowUsers"
 import CreateProduct from "../../components/CreateProduct/CreateProduct"
@@ -30,9 +30,6 @@ const AdminPage = () => {
             setUsers(data)
             const results = await getAllProduct()
             setProduct(results)
-            // const results = await getcookie()
-            // console.log(results)
-
         } catch (error) {
             console.error(error)
         }

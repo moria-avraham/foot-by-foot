@@ -1,5 +1,6 @@
 import express from "express";
-import { addWishList, createProduct, deleteFromCart, deleteFromWishList, deleteProductById, getAllProduct, getCartById, getProductById, getProductFilter, getRightShoe, getSearch, getWishList, updateProductById } from "./productCont";
+import { addWishList, createCart, createProduct, deleteFromCart, deleteFromWishList, deleteProductById, getAllProduct, getCartById, getProductById, getProductFilter, getRightShoe, getSearch, getSizeByIdProduct, getWishList, updateProductById } from "./productCont";
+
 
 
 const router = express.Router()
@@ -7,6 +8,7 @@ const router = express.Router()
 router
     .get("/get-right-shoe", getRightShoe)
     .get("/get-Product/:id", getProductById)
+    .get("/get-size/:id", getSizeByIdProduct)
     .get("/get-all-prodct", getAllProduct)
     .get("/get-Product-filter/:filter", getProductFilter)
     .get("/get-search/:search", getSearch)
@@ -14,7 +16,7 @@ router
     .get("/get-wish-list/:userID", getWishList)
     .post("/add-wish-list", addWishList)
     .post("/create-product", createProduct)
-    .post("/create-cart",)
+    .post("/create-cart", createCart)
     .delete("/delete-from-cart/:cartID", deleteFromCart)
     .delete("/delete-from-wish_list/:wishListID", deleteFromWishList)
     .delete("/delete-product/:productID", deleteProductById)

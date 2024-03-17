@@ -1,21 +1,42 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import "./ShoeCard.scss"
-import { addToWishList } from "../../API/productApi"
-import { Style } from "@mui/icons-material"
+import { addToCart, addToWishList, getProductSize } from "../../API/productApi"
+
+
 
 
 const ShoeCard: FC<productProps> = ({ product }) => {
     const [selectedImage, setSelectedImage] = useState<string | undefined>((product.right_shoe))
+    const [selectedSize, setSelectedSize] = useState<number | null>()
+    const [sizes, setSizes] = useState([])
+    const getSize = async (id: number) => {
+        try {
+            const data = await getProductSize(id)
+            setSizes(data)
+        } catch (error) {
+            console.error(error)
+        }
+
+    };
+    useEffect(() => { getSize(product.product_id) }, [])
     const handleClick = async (productID: number) => {
         try {
             const data = await addToWishList(productID, 1)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    const addCart = async (productID: number, userID: number, size: number) => {
+        try {
+            const data = await addToCart(productID, userID, size)
             console.log(data)
         } catch (error) {
             console.error(error)
         }
     }
+
     return (
         <div className="card">
             <div className="description">
@@ -23,11 +44,12 @@ const ShoeCard: FC<productProps> = ({ product }) => {
                 <h2>₪{product.price}</h2>
                 <div className="img_description">
                     <img width={50} src={product.right_shoe} />
-                    <p>{product.description}</p>
+                    <p className="text_description" >{product.description}</p>
+                    <div className="sizes">{sizes.map((size) => <button onClick={() => setSelectedSize((size.size))} className="size">{size.size} </button>)}</div>
                 </div>
                 <p>? DREAM CARD חברי מועדון  </p>
                 <p> ברכישת מוצר זה ניתן לצבור כ 64 נק'</p>
-                <button>הוסף לעגלה</button>
+                <button onClick={() => addCart(product.product_id, 1, selectedSize)}>הוסף לעגלה</button>
                 <button>קניה מהירה</button>
             </div>
             <div className="imges">

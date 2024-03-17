@@ -24,11 +24,12 @@ type product = {
     left_shoe: string,
     right_shoe: string,
     together: string,
-    back: string
+    back: string,
 
 }
 type productProps = {
-    product: product
+    product: product,
+    // sizes: []
 
 }
 

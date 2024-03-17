@@ -29,6 +29,18 @@ export const getProductById = async (id: number) => {
         console.error(error);
     }
 }
+export const getProductSize = async (id: number) => {
+    try {
+        if (!id) throw new Error("Not id in getProductById ");
+
+        const response = await axios.get(`api/product/get-size/${id}`
+        );
+        return response.data.results;
+
+    } catch (error) {
+        console.error(error);
+    }
+}
 export const getFilterProduct = async (filter: string) => {
     try {
         if (!filter) throw new Error("Not filter in getFilterProduct ");
@@ -135,7 +147,7 @@ export const addToWishList = async (productID: number, userID: number) => {
 
 export const deleteWishList = async (wishListID: number) => {
     try {
-        if (!wishListID) throw new Error("No id in deleteFromCart ");
+        if (!wishListID) throw new Error("No id  ");
         const response = await axios.delete(`/api/product/delete-from-wish_list/${wishListID}`
         );
         return response.data;
@@ -143,3 +155,14 @@ export const deleteWishList = async (wishListID: number) => {
         console.error(error)
     }
 }
+
+export const addToCart = async (productID: number, userID: number, size: number) => {
+    try {
+        if (!productID || !userID || !size) throw new Error("No id  ");
+        return await axios.post(`api/product/create-cart`, { productID, userID, size })
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
