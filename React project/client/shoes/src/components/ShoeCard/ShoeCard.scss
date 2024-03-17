@@ -27,9 +27,21 @@ body {
             justify-content: space-between;
 
             .bigImg {
-
                 display: flex;
                 justify-content: center;
+
+                .heart {
+                    height: 5ch;
+                    z-index: 3;
+                    background: none;
+                    position: relative;
+                    right: 7vh;
+                }
+
+                //     .heart:hover
+                //     {
+                //     border: none;
+                // }
             }
 
             .imgBth {

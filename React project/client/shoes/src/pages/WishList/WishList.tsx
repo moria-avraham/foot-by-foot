@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { deleteWishList, getWishListProduct } from "../../API/productApi"
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./WishList.scss"
 
 const WishList = () => {
     const [products, setProducts] = useState([])
@@ -29,7 +30,7 @@ const WishList = () => {
         <div>
             <h1>WISH LIST</h1>
             {products.map((product) => {
-                return <div>
+                return <div className="wish_list">
                     <button onClick={() => hendeleDelete(Number(product.id))}>
                         <FontAwesomeIcon icon={faTrashCan} />
                     </button>

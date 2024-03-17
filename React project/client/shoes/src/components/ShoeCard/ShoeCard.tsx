@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import "./ShoeCard.scss"
 import { addToWishList } from "../../API/productApi"
+import { Style } from "@mui/icons-material"
 
 
 const ShoeCard: FC<productProps> = ({ product }) => {
@@ -31,8 +32,8 @@ const ShoeCard: FC<productProps> = ({ product }) => {
             </div>
             <div className="imges">
                 <div className="bigImg" >
-                    <button onClick={() => handleClick(product.product_id)}><FontAwesomeIcon icon={faHeart} /></button>
                     <img width={250} src={selectedImage} />
+                    <button className="heart" onClick={() => handleClick(product.product_id)}><FontAwesomeIcon icon={faHeart} /></button>
                 </div>
                 <div className="imgBth">
                     <button onClick={() => setSelectedImage(product.right_shoe)}><img width={50} src={product.right_shoe} /></button>
