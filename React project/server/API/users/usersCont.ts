@@ -26,82 +26,6 @@ export async function getAllUsers(req: express.Request, res: express.Response) {
     }
 }
 
-export function getUserFromToken(req: express.Request, res: express.Response) {
-    try {
-        const secret = process.env.SECRET;
-        if (!secret) throw new Error("Secret not defined");
-
-        const token = req.cookies?.token;
-
-        if (!token) {
-            res.status(401).send({ ok: false, message: 'Token not provided' });
-            return;
-        }
-
-        const payload = jwt.verify(token, secret);
-
-        if (!payload) {
-            res.status(401).send({ ok: false, message: 'Invalid token' });
-            return;
-        }
-
-        const userId = (payload as any).userId;
-
-        const userQuery = `SELECT * FROM users WHERE user_id = ?`;
-
-        connection.query(userQuery, [userId], (err, results) => {
-            if (err) {
-                console.error(err);
-                res.status(500).send({ ok: false, error: err });
-                return;
-            }
-
-            // if (!Array.isArray(results) || results.length === 0) {
-            //     res.status(401).send({ ok: false, message: 'User not found' });
-            //     return;
-            // }
-
-            const user = results[0] as RowDataPacket;
-            res.status(200).send({ ok: true, user });
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ ok: false, error: error.message });
-    }
-}
-
-
-
-
-//לבדוקקקקקקקק
-// export async function getUserByCookie(req, res) {
-//     try {
-//         const { user } = req.cookies;
-
-//         const secret = process.env.SECRET
-//         if (!secret) throw new Error("no secret")
-
-//         const decodedId = jwt.decode(user, secret)
-//         const { userID } = decodedId;
-
-
-//         const query = `SELECT * FROM users WHERE user_id = ${userID}`;
-
-//         connection.query(query, (err, results) => {
-//             try {
-//                 if (err) throw err;
-//                 console.log(results)
-//                 res.send({ ok: true, results: results[0] })
-//             } catch (error) {
-//                 res.status(500).send({ ok: false, error })
-//             }
-//         })
-
-//     } catch (error) {
-//         res.status(500).send({ ok: false, error })
-//     }
-// }
-
 export async function createUser(req: express.Request, res: express.Response) {
     try {
 
@@ -171,41 +95,49 @@ export function logIn(req: express.Request, res: express.Response) {
     }
 }
 
+export function getUserFromToken(req: express.Request, res: express.Response) {
+    try {
+        const secret = process.env.SECRET;
+        if (!secret) throw new Error("Secret not defined");
 
-// export const getUserFromToken = async (req: express.Request, res: express.Response
-// ) => {
-//     try {
-//         const token = req.cookies.token;
-//         if (!token) {
-//             res.send({ ok: true, user: null });
-//             return;
-//         }
-//         const secret = process.env.SECRET;
-//         if (!secret) {
-//             throw new Error("No secret key available");
-//         }
+        const token = req.cookies?.token;
 
-//         const decoded = jwt.verify(token, secret) as { user_id: number };
-//         const { user_id } = decoded;
-//         const query = `SELECT * FROM users WHERE user_id = ?;`;
-//         connection.query(
-//             query, [user_id],
-//             (err, results: RowDataPacket[], fields) => {
-//                 try {
-//                     if (err) throw err;
-//                     const user = results[0] as RowDataPacket;
-//                     res.send({ ok: true, user });
-//                 } catch (error) {
-//                     console.error(error);
-//                     res.status(500).send({ ok: false, error });
-//                 }
-//             }
-//         );
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send({ ok: false, error });
-//     }
-// };
+        if (!token) {
+            res.status(401).send({ ok: false, message: 'Token not provided' });
+            return;
+        }
+
+        const payload = jwt.verify(token, secret);
+
+        if (!payload) {
+            res.status(401).send({ ok: false, message: 'Invalid token' });
+            return;
+        }
+
+        const userId = (payload as any).user_id;
+
+        const userQuery = `SELECT * FROM users WHERE user_id = ?`;
+
+        connection.query(userQuery, [userId], (err, results) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send({ ok: false, error: err });
+                return;
+            }
+
+            if (!Array.isArray(results) || results.length === 0) {
+                res.status(401).send({ ok: false, message: 'User not found' });
+                return;
+            }
+
+            const user = results[0] as RowDataPacket;
+            res.status(200).send({ ok: true, user });
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ ok: false, error: error.message });
+    }
+}
 
 export function deleteUserById(req: express.Request, res: express.Response) {
     try {

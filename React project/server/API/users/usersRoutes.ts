@@ -5,7 +5,7 @@ const router = express.Router()
 
 router
     .get("/get-all-users", getAllUsers)
-    .get("/get-by-cookie", getUserFromToken)
+    .get("/get-from-Token", getUserFromToken)
     .post("/register", createUser)
     .post("/logIn", logIn)
     .delete("/delete-user/:userID", deleteUserById)

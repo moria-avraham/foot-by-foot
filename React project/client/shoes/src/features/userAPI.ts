@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getUserApi = createAsyncThunk('get-user', async () => {
     try {
-        const { data } = await axios.get('get-by-cookie')
+        const { data } = await axios.get('get-from-Token')
         if (!data) throw new Error("no data on function getUserApi")
         return data
     } catch (error) {

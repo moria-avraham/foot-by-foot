@@ -31,7 +31,6 @@ const ShoeCard: FC<productProps> = ({ product }) => {
     const addCart = async (productID: number, userID: number, size: number) => {
         try {
             const data = await addToCart(productID, userID, size)
-            console.log(data)
         } catch (error) {
             console.error(error)
         }
