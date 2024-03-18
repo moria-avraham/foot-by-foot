@@ -13,7 +13,7 @@ export const getAllUser = async () => {
 
 export const getLoginUser = async () => {
     try {
-        return await axios.get(`api/users/get-by-cookie`)
+        return await axios.get(`api/users/get-from-Token`)
 
     } catch (error) {
         console.error(error);

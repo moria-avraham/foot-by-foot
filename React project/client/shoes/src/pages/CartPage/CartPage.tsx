@@ -9,7 +9,6 @@ const CartPage = () => {
     const hendeleDelete = async (cartID: number) => {
         try {
             const data = await deleteFromCart(cartID)
-            console.log(data)
 
         } catch (error) {
             console.error(error)
@@ -40,7 +39,8 @@ const CartPage = () => {
                     <button className="addCart">הוסף לסל</button>
                     <div>
                         <p>{cart.price}</p>
-                        <p>{cart.amount}</p>
+                        <p>{cart.amount} :כמות</p>
+                        <p>{cart.size} :מידה</p>
                     </div>
                     <p>{cart.product_name}</p>
 
