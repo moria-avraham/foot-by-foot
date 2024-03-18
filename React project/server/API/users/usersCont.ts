@@ -77,7 +77,7 @@ export function logIn(req: express.Request, res: express.Response) {
 
                 const user = results[0] as RowDataPacket;
 
-                const payload = { user_id: user.userid };
+                const payload = { user_id: user.user_id };
                 const token = jwt.sign(payload, secret);
 
 

@@ -2,12 +2,15 @@ import { useState } from "react";
 import { getLoginUser, loginUser } from "../../API/userApi";
 import { Link, useNavigate } from "react-router-dom";
 import "./LogIn.scss"
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getUserApi } from "../../features/userAPI";
+import { userSelector } from "../../features/userSlice";
 
 
 const LogIn = () => {
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(userSelector)
     const [email, setuserEmail] = useState<string>("");
     const [password, setpassword] = useState<string>("");
     const [comments, setComments] = useState("");
@@ -17,7 +20,9 @@ const LogIn = () => {
             ev.preventDefault();
             if (email && password) {
                 const data = await loginUser(email, password)
-                console.log(data)
+                // console.log(data)
+                dispatch(getUserApi())
+                console.log((user.data.user))
                 // if (data?.data.user.role == "client") {
                 //     navigate("/")
                 // } else if (data?.data.user.role == "admin") {
@@ -27,7 +32,7 @@ const LogIn = () => {
                 //     setComments("Pleas")
                 // }
                 const results = await getLoginUser()
-                console.log(results)
+                console.log(results?.data.user)
             } else {
                 setComments("Please fill out all the necessary fields")
             }
@@ -44,6 +49,7 @@ const LogIn = () => {
                 <h1>Welcome to foot by foot</h1>
                 <h2>Log In</h2>
                 <p>email:</p><input type="email" onInput={(ev) => { setuserEmail((ev.target as HTMLInputElement).value) }} />
+
                 <p>password:</p><input type="password" onInput={(ev) => { setpassword((ev.target as HTMLInputElement).value) }} />
                 <br />
                 <div className="comments">{comments}</div>
