@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom"
 
 export const Search = () => {
     const { id } = useParams();
-    console.log(id)
+    // console.log(id)
     const [search, setSearch] = useState("")
     const [filterSearch, setFiltersearch] = useState<product[]>()
 
@@ -13,7 +13,6 @@ export const Search = () => {
         try {
             const data = await SearchProduct(search)
             setFiltersearch(data)
-            console.log(data)
         } catch (error) {
             console.error(error)
         }
