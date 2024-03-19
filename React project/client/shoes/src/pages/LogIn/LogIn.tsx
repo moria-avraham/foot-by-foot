@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getLoginUser, loginUser } from "../../API/userApi";
 import { Link, useNavigate } from "react-router-dom";
 import "./LogIn.scss"
@@ -15,24 +15,22 @@ const LogIn = () => {
     const [password, setpassword] = useState<string>("");
     const [comments, setComments] = useState("");
 
+    useEffect(() => { dispatch(getUserApi()) }, [])
+
     const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
         try {
             ev.preventDefault();
             if (email && password) {
                 const data = await loginUser(email, password)
-                // console.log(data)
-                dispatch(getUserApi())
-                console.log((user.data.user))
-                // if (data?.data.user.role == "client") {
-                //     navigate("/")
-                // } else if (data?.data.user.role == "admin") {
-                //     navigate("/admin")
-                // }
-                // if (data?.response.status == 401) {
-                //     setComments("Pleas")
-                // }
-                const results = await getLoginUser()
-                console.log(results?.data.user)
+                if ((user.role) == "client") {
+                    navigate("/")
+                } else if ((user.role) == "admin") {
+                    navigate("/admin")
+                }
+                if (data?.response.status == 401) {
+                    setComments("incorrect email or password")
+                }
+
             } else {
                 setComments("Please fill out all the necessary fields")
             }
@@ -41,6 +39,13 @@ const LogIn = () => {
         }
     }
 
+    // const handleLogin = () => {
+    //     if ((user.role) == "client") {
+    //         navigate("/")
+    //     } else if ((user.role) == "admin") {
+    //         navigate("/admin")
+    //     }
+    // }
 
     return (
         <div className="login">

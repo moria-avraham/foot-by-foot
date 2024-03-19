@@ -37,7 +37,8 @@ export const loginUser = async (email: string, password: string) => {
             throw new Error("Not enough data for log in");
         }
 
-        return await axios.post("api/users/logIn", { email, password })
+        const response = await axios.post("api/users/logIn", { email, password })
+        return response;
     } catch (error) {
         console.error("Error fetching data from the API", error);
         return error;
