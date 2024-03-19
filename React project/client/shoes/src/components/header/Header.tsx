@@ -4,11 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { Search } from "../Search/Search"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
+import { userSelector } from "../../features/userSlice"
+import { useEffect } from "react"
+import { getUserApi } from "../../features/userAPI"
 
 
 
 const Header = () => {
-
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(userSelector)
+    useEffect(() => { dispatch(getUserApi()) }, [])
     return (
         <header>
             <Link to={"/"} className="logo">foot by foot</Link>
@@ -30,6 +36,8 @@ const Header = () => {
                     <FontAwesomeIcon icon={faCartShopping} style={{ color: "white" }} /></Link>
             </div>
             <NavLink to={"login"}>התחבר/י</NavLink>
+            {/* {(user.user_id) == !0 ? <NavLink to={"login"}>התחבר/י</NavLink> : <p>  ,{(user.user_full_name)} שלום</p>} */}
+
 
         </header>
     )

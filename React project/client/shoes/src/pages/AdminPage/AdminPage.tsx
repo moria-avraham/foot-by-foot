@@ -23,7 +23,6 @@ const AdminPage = () => {
     useEffect(() => {
         dispatch(getUserApi())
     }, [])
-    console.log(user)
     const getData = async () => {
         try {
             const data = await getAllUser()
