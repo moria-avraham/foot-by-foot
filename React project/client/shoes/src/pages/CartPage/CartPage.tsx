@@ -3,9 +3,13 @@ import { deleteFromCart, getUserCart } from "../../API/productApi";
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CartPage.scss"
+import stripe from "react-stripe-checkout"
+
 
 const CartPage = () => {
+    const KEY = process.env.P_KEY;
     const [cart, setCart] = useState([])
+    // const [amount, setAmount] = useState()
     const hendeleDelete = async (cartID: number) => {
         try {
             const data = await deleteFromCart(cartID)

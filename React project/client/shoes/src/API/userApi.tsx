@@ -67,5 +67,6 @@ export const updateUserBYID = async (userName: string, userEmeil: string, userPh
     } catch (error) {
         console.error("Error fetching data from the API", error);
         return error;
+        ;
     }
 }

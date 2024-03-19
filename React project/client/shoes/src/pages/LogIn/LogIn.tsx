@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getLoginUser, loginUser } from "../../API/userApi";
+import { useState } from "react";
+import { loginUser } from "../../API/userApi";
 import { Link, useNavigate } from "react-router-dom";
 import "./LogIn.scss"
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -15,37 +15,34 @@ const LogIn = () => {
     const [password, setpassword] = useState<string>("");
     const [comments, setComments] = useState("");
 
-    useEffect(() => { dispatch(getUserApi()) }, [])
+
 
     const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
         try {
             ev.preventDefault();
             if (email && password) {
                 const data = await loginUser(email, password)
+                dispatch(getUserApi())
                 if ((user.role) == "client") {
                     navigate("/")
                 } else if ((user.role) == "admin") {
                     navigate("/admin")
+                } else if ((user)) {
+
+                    console.log("first")
                 }
-                if (data?.response.status == 401) {
-                    setComments("incorrect email or password")
-                }
+
 
             } else {
                 setComments("Please fill out all the necessary fields")
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
+
         }
     }
 
-    // const handleLogin = () => {
-    //     if ((user.role) == "client") {
-    //         navigate("/")
-    //     } else if ((user.role) == "admin") {
-    //         navigate("/admin")
-    //     }
-    // }
+
 
     return (
         <div className="login">
