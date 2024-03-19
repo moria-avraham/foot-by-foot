@@ -7,12 +7,13 @@ export const Search = () => {
     const { id } = useParams();
     console.log(id)
     const [search, setSearch] = useState("")
-    const [filterSearch, setFiltersearch] = useState([])
+    const [filterSearch, setFiltersearch] = useState<product[]>()
 
     const AllProduct = async () => {
         try {
             const data = await SearchProduct(search)
             setFiltersearch(data)
+            console.log(data)
         } catch (error) {
             console.error(error)
         }
@@ -32,8 +33,10 @@ export const Search = () => {
     return (
         <div><input className="input_search" type="text" placeholder='Search' onInput={(ev) => setSearch((ev.target as HTMLInputElement).value)} />
             {filterSearch ? <div className="search">{filterSearch.map((filter) => <div className="search_info">
-                <p>{filter.price}</p>
-                <p>{filter.product_name}</p>
+                <div>
+                    <p>{filter.product_name}</p>
+                    <p>₪{filter.price}</p>
+                </div>
                 <img src={filter.right_shoe} />
             </div>)}</div> : null}
         </div>
