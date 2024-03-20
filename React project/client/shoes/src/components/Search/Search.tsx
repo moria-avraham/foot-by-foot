@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import { SearchProduct } from "../../API/productApi"
 import "./Search.scss"
-import { Link, useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 
 export const Search = () => {
     const { id } = useParams();
-    // console.log(id)
+    const location = useLocation()
+    console.log(id)
+    console.log(location)
     const [search, setSearch] = useState("")
     const [filterSearch, setFiltersearch] = useState<product[]>()
 

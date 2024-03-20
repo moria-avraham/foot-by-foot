@@ -9,8 +9,10 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { getUserApi } from "../../features/userAPI"
 import { userSelector } from "../../features/userSlice"
 import CreateUser from "../../components/CreateUser/CreateUser"
+import { useNavigate } from "react-router"
 
 const AdminPage = () => {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const user = useAppSelector(userSelector)
     const [users, setUsers] = useState([])
@@ -22,6 +24,9 @@ const AdminPage = () => {
 
     useEffect(() => {
         dispatch(getUserApi())
+        if ((user.role) == "client" || (user.role) == "") {
+            navigate("/")
+        }
     }, [])
     const getData = async () => {
         try {
