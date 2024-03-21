@@ -3,7 +3,7 @@
 # Project Title: foot-by-foot
 
 ## Overview
-This project is a full-stack web application built using React.js for the frontend, Node.js for the backend, and MySQL for the database. It also integrates FontAwesome for icons and Redux for state management.
+This project aims to develop a responsive full-stack web application suitable for screens as small as 15 inches (1536px). It draws inspiration from the Footlocker website and utilizes React for the frontend, Node.js for the backend, and MySQL for the database. Additionally, FontAwesome is used for icon integration, and Redux manages the state of the application.
 
 ## Technologies Used
 - Frontend:
@@ -40,5 +40,8 @@ This project is a full-stack web application built using React.js for the fronte
 
 ## Additional Notes
 - Ensure that Node.js and MySQL are installed on your system.
-- Customize the project according to your requirements.
-- Explore additional features and libraries for enhancing functionality.
+- There is a deployment to the site and you can see it in the link 
+## Start the Node.js Server:
+- Open server in the terminal and write npm start
+## Start the React Development Server:
+- Open shoes inside the client in the terminal and write npm run dev
