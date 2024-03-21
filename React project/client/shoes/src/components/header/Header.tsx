@@ -15,7 +15,6 @@ const Header = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(userSelector)
     useEffect(() => { dispatch(getUserApi()) }, [])
-    console.log((user))
     return (
         <header>
             <Link to={"/"} className="logo">foot by foot</Link>
