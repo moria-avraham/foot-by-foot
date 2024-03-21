@@ -34,7 +34,7 @@ const WishList = () => {
                     <button onClick={() => hendeleDelete(Number(product.id))}>
                         <FontAwesomeIcon icon={faTrashCan} />
                     </button>
-
+                    <button className="addCart">הוסף לסל</button>
                     <div>
                         <p>{product.price}</p>
                         <p>{product.amount}</p>
