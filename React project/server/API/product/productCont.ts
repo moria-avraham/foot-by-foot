@@ -1,5 +1,6 @@
 import express from "express";
 import connection from "../../DB/database";
+import stripe from "stripe";
 
 export async function getRightShoe(req: express.Request, res: express.Response) {
     try {
@@ -332,6 +333,31 @@ export async function createCart(req: express.Request, res: express.Response) {
                 res.status(500).send({ ok: false, error })
             }
         })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({ ok: false, error })
+    }
+
+}
+
+
+
+export async function productPayment(req: express.Request, res: express.Response) {
+    try {
+        const { pricee, token } = req.body;
+        if (!pricee || !token) {
+            throw new Error('no');
+        }
+
+        // await charges.charges.create({
+        //     source: token.id,
+        //     amount: pricee,
+        //     currency: 'usd',
+        // });
+        if (pricee || token) {
+
+            res.status(200).send({ success: true, message: 'Payment successful' });
+        }
     } catch (error) {
         console.error(error)
         res.status(500).send({ ok: false, error })

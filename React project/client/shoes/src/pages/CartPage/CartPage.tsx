@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { deleteFromCart, getUserCart } from "../../API/productApi";
+import { deleteFromCart, getUserCart, payment } from "../../API/productApi";
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CartPage.scss"
-import stripe from "react-stripe-checkout"
+
+
+
+
 
 
 const CartPage = () => {
     // const KEY = process.env.P_KEY;
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState<Cart[]>()
     // const [amount, setAmount] = useState()
     const hendeleDelete = async (cartID: number) => {
         try {
@@ -31,16 +34,25 @@ const CartPage = () => {
     };
 
     useEffect(() => { getCart(1) }, [])
+    const pricee = 10;
+    const p = "pk_live_51Ow80Z2KjkUgMxdqBwZpNxjGpjRtft2BU4XSgdDAE821n8nGFvk0uESQti1s8VYrsCUW1moTzjifm2949vGoEyiY007LOFHivL"
+    const payNow = async (token: any) => {
+        try {
+            const data = await payment(pricee, token)
+        } catch (error) {
+            console.error(error)
+        }
+    }
     return (
         <div>
             <h1>עגלת קניות</h1>
-            {cart.map((cart) => {
-                return <div className="cart">
+            {cart?.map((cart) => {
+                return <div key={cart.cart_id} className="cart">
 
                     <button onClick={() => hendeleDelete(Number(cart.cart_id))}>
                         <FontAwesomeIcon icon={faTrashCan} />
                     </button>
-                    <button className="addCart">הוסף לסל</button>
+
                     <div>
                         <p>{cart.price}</p>
                         <p>{cart.amount} :כמות</p>
@@ -53,6 +65,7 @@ const CartPage = () => {
                 </div>
             }
             )}
+
         </div>
     )
 }

@@ -29,7 +29,6 @@ type product = {
 }
 type productProps = {
     product: product,
-    // sizes: []
 
 }
 
@@ -44,3 +43,14 @@ type user = {
 type UserProps = {
     user: user
 }
+
+
+type Cart = {
+    cart_id: number,
+    price: number,
+    amount: number,
+    size: number,
+    product_name: string,
+    right_shoe: string
+}
+

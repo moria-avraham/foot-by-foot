@@ -1,5 +1,5 @@
 import express from "express";
-import { addWishList, createCart, createProduct, deleteFromCart, deleteFromWishList, deleteProductById, getAllProduct, getCartById, getProductById, getProductFilter, getRightShoe, getSearch, getSizeByIdProduct, getWishList, updateProductById } from "./productCont";
+import { addWishList, createCart, createProduct, deleteFromCart, deleteFromWishList, deleteProductById, getAllProduct, getCartById, getProductById, getProductFilter, getRightShoe, getSearch, getSizeByIdProduct, getWishList, productPayment, updateProductById } from "./productCont";
 import { isAdmin } from "../users/Middleware";
 
 
@@ -18,6 +18,7 @@ router
     .post("/add-wish-list", addWishList)
     .post("/create-product", isAdmin, createProduct)
     .post("/create-cart", createCart)
+    .post("/payment", productPayment)
     .delete("/delete-from-cart/:cartID", deleteFromCart)
     .delete("/delete-from-wish_list/:wishListID", deleteFromWishList)
     .delete("/delete-product/:productID", isAdmin, deleteProductById)

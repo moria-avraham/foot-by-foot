@@ -30,6 +30,8 @@ header {
 
         .brands {
             color: white;
+            display: flex;
+            align-items: center;
 
             img {
                 width: 50px;
@@ -43,7 +45,7 @@ header {
 
                 display: flex;
                 background-color: rgba(172, 169, 162, 0.852);
-                width: 40vh;
+                width: 45vh;
                 height: 13ch;
                 position: absolute;
                 top: 70px;

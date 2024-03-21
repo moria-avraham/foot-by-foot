@@ -156,6 +156,7 @@ export const deleteWishList = async (wishListID: number) => {
     }
 }
 
+
 export const addToCart = async (productID: number, userID: number, size: number) => {
     try {
         if (!productID || !userID || !size) throw new Error("No id  ");
@@ -166,3 +167,12 @@ export const addToCart = async (productID: number, userID: number, size: number)
     }
 }
 
+export const payment = async (pricee: number, token: any) => {
+    try {
+
+        return await axios.post(`api/product/payment`, { pricee, token })
+
+    } catch (error) {
+        console.error(error)
+    }
+}

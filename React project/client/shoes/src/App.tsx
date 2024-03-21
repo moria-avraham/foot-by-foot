@@ -12,6 +12,7 @@ import TermsOfUsePage from "./pages/info/TermsOfUsePage"
 import TermsPage from "./pages/info/TermsPage"
 import WishList from "./pages/WishList/WishList"
 import CartPage from "./pages/CartPage/CartPage"
+import ErrorPage from "./pages/ErrorPage/ErrorPage"
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/terms_of_use" element={<TermsOfUsePage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes >
         <Footer />
       </BrowserRouter>

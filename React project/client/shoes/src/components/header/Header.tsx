@@ -19,11 +19,11 @@ const Header = () => {
         <header>
             <Link to={"/"} className="logo">foot by foot</Link>
             <div className="options">
-                <a className="brands">Brands <div className="brands_img">
+                <div className="brands">Brands <div className="brands_img">
                     <Link to={"filter/VANS"}><img src="https://www.icoupons.co.il/wp-content/uploads/2021/02/41241-480x480.jpg" /></Link>
                     <Link to={"filter/ADIDAS"}><img src="https://cdn.britannica.com/94/193794-050-0FB7060D/Adidas-logo.jpg" /></Link>
                     <Link to={"filter/NIKE"}><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtC3OuScEEsp0YXEjdmjC_pev9BxuBP72r8w&usqp=CAU" /></Link>
-                </div></a>
+                </div></div>
                 <NavLink to={"filter/kids"}>Kids</NavLink>
                 <NavLink to={"filter/men"}>Men</NavLink>
                 <NavLink to={"filter/women"}>Women</NavLink>
