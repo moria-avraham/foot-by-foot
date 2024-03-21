@@ -167,12 +167,13 @@ export const addToCart = async (productID: number, userID: number, size: number)
     }
 }
 
-export const payment = async (pricee: number, token: any) => {
-    try {
+// export const payment = async (userID: number) => {
+//     try {
 
-        return await axios.post(`api/product/payment`, { pricee, token })
 
-    } catch (error) {
-        console.error(error)
-    }
-}
+//         return await axios.post(`api/product/payment`, { userID })
+
+//     } catch (error) {
+//         console.error(error)
+//     }
+// }

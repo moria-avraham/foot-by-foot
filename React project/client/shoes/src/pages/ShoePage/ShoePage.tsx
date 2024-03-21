@@ -10,7 +10,7 @@ const ShoePage = () => {
     const [chosenProduct, setChosenProduct] = useState([])
     const { id } = useParams();
 
-    const allProduct = async (id: number) => {
+    const ProductID = async (id: number) => {
         try {
             const data = await getProductById(id)
             setChosenProduct(data)
@@ -19,7 +19,13 @@ const ShoePage = () => {
         }
 
     };
-    useEffect(() => { allProduct(Number(id)) }, []);
+    useEffect(() => { ProductID(Number(id)) }, []);
+
+    useEffect(() => {
+        if (id) {
+            ProductID(Number(id))
+        }
+    }, [id])
 
     return (
         <>

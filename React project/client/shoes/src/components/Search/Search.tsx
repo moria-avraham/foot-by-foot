@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react"
 import { SearchProduct } from "../../API/productApi"
 import "./Search.scss"
-import { Link, useLocation, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export const Search = () => {
-    // const { id } = useParams();
-    // const location = useLocation()
-    // console.log(id)
-    // console.log(location.pathname)
+
     const [search, setSearch] = useState("")
     const [filterSearch, setFiltersearch] = useState<product[]>()
 
@@ -26,9 +23,7 @@ export const Search = () => {
         return () => clearTimeout(req)
     }, [search])
 
-    // useEffect(() => {
-    //     window.location.reload();
-    // }, [location.pathname])
+
 
 
     return (

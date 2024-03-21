@@ -1,6 +1,8 @@
 import express from "express";
 import connection from "../../DB/database";
-import stripe from "stripe";
+import Stripe from "stripe";
+import { RowDataPacket } from "mysql2";
+
 
 export async function getRightShoe(req: express.Request, res: express.Response) {
     try {
@@ -342,25 +344,26 @@ export async function createCart(req: express.Request, res: express.Response) {
 
 
 
-export async function productPayment(req: express.Request, res: express.Response) {
-    try {
-        const { pricee, token } = req.body;
-        if (!pricee || !token) {
-            throw new Error('no');
-        }
+// export async function productPayment(req: express.Request, res: express.Response) {
+//     try {
+//         const { userID } = req.body;
+//         if (!userID) throw new Error("no Id");
+//         const query = `SELECT * FROM cart JOIN product ON product.product_id = cart.prouct_id where cart.user_id=${userID}; `;
+//         connection.query(query, async (err, results) => {
+//             try {
+//                 if (err) throw err;
 
-        // await charges.charges.create({
-        //     source: token.id,
-        //     amount: pricee,
-        //     currency: 'usd',
-        // });
-        if (pricee || token) {
 
-            res.status(200).send({ success: true, message: 'Payment successful' });
-        }
-    } catch (error) {
-        console.error(error)
-        res.status(500).send({ ok: false, error })
-    }
 
-}
+
+//             } catch (error) {
+//                 console.error(error);
+//                 res.status(500).send({ ok: false, error });
+//             }
+//         });
+
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send({ ok: false, error });
+//     }
+// }

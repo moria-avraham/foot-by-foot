@@ -7,8 +7,6 @@ import "./CartPage.scss"
 
 
 
-
-
 const CartPage = () => {
     // const KEY = process.env.P_KEY;
     const [cart, setCart] = useState<Cart[]>()
@@ -34,11 +32,12 @@ const CartPage = () => {
     };
 
     useEffect(() => { getCart(1) }, [])
-    const pricee = 10;
-    const p = "pk_live_51Ow80Z2KjkUgMxdqBwZpNxjGpjRtft2BU4XSgdDAE821n8nGFvk0uESQti1s8VYrsCUW1moTzjifm2949vGoEyiY007LOFHivL"
-    const payNow = async (token: any) => {
+
+    // const p = ("pk_live_51Ow80Z2KjkUgMxdqBwZpNxjGpjRtft2BU4XSgdDAE821n8nGFvk0uESQti1s8VYrsCUW1moTzjifm2949vGoEyiY007LOFHivL")
+    const payNow = async () => {
         try {
-            const data = await payment(pricee, token)
+            const data = await payment(1)
+            console.log(data)
         } catch (error) {
             console.error(error)
         }
@@ -65,7 +64,8 @@ const CartPage = () => {
                 </div>
             }
             )}
-
+            {/* <button onClick={() => payNow()}>שלם</button>
+            */}
         </div>
     )
 }

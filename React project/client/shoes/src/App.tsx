@@ -34,6 +34,7 @@ function App() {
           <Route path="/terms_of_use" element={<TermsOfUsePage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="*" element={<ErrorPage />} />
+          {/* <Route path="/*" element={<p>Page 404</p>} /> */}
         </Routes >
         <Footer />
       </BrowserRouter>
