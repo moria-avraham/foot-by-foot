@@ -17,7 +17,7 @@ const UpdateProduct: FC<ProductProps> = ({ product }) => {
 
             if (company && price && consumer && name && description && right && left && together && back && productID) {
                 const data = await updateProduct(company, price, consumer, name, description, right, left, together, back, productID)
-
+                window.location.reload();
             }
         } catch (error) {
             console.error(error)

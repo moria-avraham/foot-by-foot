@@ -14,6 +14,7 @@ const WishList = () => {
 
     const hendeleDelete = async (wishListID: number) => {
         try {
+
             const data = await deleteWishList(wishListID)
             window.location.reload();
 
@@ -24,33 +25,29 @@ const WishList = () => {
 
     const getWishList = async () => {
         try {
-
             const data = await getWishListProduct((user.user_id))
             setProducts(data)
-
-
         } catch (error) {
             console.log(error)
         }
     }
     const addProductToCart = async (productID: number) => {
         try {
-
             const data = await addToCart(productID, (user.user_id), 1)
-
         } catch (error) {
             console.log(error)
         }
     }
 
 
-    useEffect(() => { dispatch(getUserApi()), getWishList() }, [])
+    useEffect(() => { dispatch(getUserApi()), getWishList() }, [(user)])
+
 
     return (
         <div>
             <h1>WISH LIST</h1>
             {products?.map((product) => {
-                return <div className="wish_list">
+                return <div key={product.product_id} className="wish_list">
                     <button onClick={() => hendeleDelete(Number(product.id))}>
                         <FontAwesomeIcon icon={faTrashCan} />
                     </button>
@@ -60,7 +57,6 @@ const WishList = () => {
                         <p>{product.amount}</p>
                     </div>
                     <p>{product.product_name}</p>
-
                     <img src={product.right_shoe} width={150} />
 
                 </div>

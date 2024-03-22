@@ -12,6 +12,8 @@ const ShowProduct: FC<ProductProps> = ({ product }) => {
         try {
             if (productID) {
                 const data = await deleteProcuct(productID)
+                window.location.reload();
+
             }
         } catch (error) {
             console.error(error)

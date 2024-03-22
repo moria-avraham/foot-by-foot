@@ -22,7 +22,7 @@ const FilterPage = () => {
     useEffect(() => { handleClick(filter) }, [filter]);
     return (
         <div className='filter'>
-            {filtered?.map((filter) => <ShoesGallery productID={filter.product_id} img={filter.right_shoe} productName={filter.product_name
+            {filtered?.map((filter) => <ShoesGallery key={filter.product_id} productID={filter.product_id} img={filter.right_shoe} productName={filter.product_name
             } price={filter.price} />)}
         </div>
     )
