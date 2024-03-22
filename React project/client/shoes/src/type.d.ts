@@ -1,20 +1,22 @@
 
-interface ShoeCardProps {
-    productID: number,
-    img: string,
-    productName: string,
-    price: number
+interface ShoeProps {
+    product_id: number,
+    right_shoe: string,
+    product_name: string,
+    price: number,
+    amount?: number,
+    id?: number
 }
-type shoe = {
+type ShoeCardProps = {
     productName: string,
-    productDescription: string,
-    imges: [],
+    productDescription?: string,
+    productID: number,
     price: number,
     img: string
 
 }
 
-type product = {
+type Product = {
     product_id: number,
     company: string,
     price: string,
@@ -27,12 +29,12 @@ type product = {
     back: string,
 
 }
-type productProps = {
-    product: product,
+type ProductProps = {
+    product: Product,
 
 }
 
-type user = {
+type User = {
     user_id: number,
     user_full_name: string,
     user_email: string,
@@ -41,7 +43,7 @@ type user = {
 }
 
 type UserProps = {
-    user: user
+    user: User
 }
 
 
@@ -54,3 +56,6 @@ type Cart = {
     right_shoe: string
 }
 
+type Size = {
+    size: number
+}

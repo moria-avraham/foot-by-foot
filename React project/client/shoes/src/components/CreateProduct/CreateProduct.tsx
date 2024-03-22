@@ -12,12 +12,10 @@ const CreateProduct = () => {
     const [together, setTogether] = useState("");
     const [back, setBack] = useState("");
 
-    const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async () => {
         try {
-            // ev.preventDefault();
             if (company && price && consumer && name && description && right && left && together && back) {
                 const data = await createNewProduct(company, price, consumer, name, description, right, left, together, back)
-                console.log(data)
             }
         } catch (error) {
             console.error(error)

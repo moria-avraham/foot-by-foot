@@ -1,40 +1,60 @@
 import { useEffect, useState } from "react"
-import { deleteWishList, getWishListProduct } from "../../API/productApi"
+import { addToCart, deleteWishList, getWishListProduct } from "../../API/productApi"
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./WishList.scss"
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { userSelector } from "../../features/userSlice";
+import { getUserApi } from "../../features/userAPI";
 
 const WishList = () => {
-    const [products, setProducts] = useState([])
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(userSelector)
+    const [products, setProducts] = useState<ShoeProps[]>()
 
     const hendeleDelete = async (wishListID: number) => {
         try {
             const data = await deleteWishList(wishListID)
-            console.log(data)
+            window.location.reload();
 
         } catch (error) {
             console.error(error)
         }
     }
 
-    const getWishList = async (userID: number) => {
+    const getWishList = async () => {
         try {
-            const data = await getWishListProduct(userID)
+
+            const data = await getWishListProduct((user.user_id))
             setProducts(data)
+
+
         } catch (error) {
             console.log(error)
         }
     }
-    useEffect(() => { getWishList(1) }, [])
+    const addProductToCart = async (productID: number) => {
+        try {
+
+            const data = await addToCart(productID, (user.user_id), 1)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    useEffect(() => { dispatch(getUserApi()), getWishList() }, [])
+
     return (
         <div>
             <h1>WISH LIST</h1>
-            {products.map((product) => {
+            {products?.map((product) => {
                 return <div className="wish_list">
                     <button onClick={() => hendeleDelete(Number(product.id))}>
                         <FontAwesomeIcon icon={faTrashCan} />
                     </button>
-                    <button className="addCart">הוסף לסל</button>
+                    <button onClick={() => addProductToCart(product.product_id)} className="addCart">הוסף לסל</button>
                     <div>
                         <p>{product.price}</p>
                         <p>{product.amount}</p>

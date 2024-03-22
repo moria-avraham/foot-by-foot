@@ -18,7 +18,6 @@ router
     .post("/add-wish-list", addWishList)
     .post("/create-product", isAdmin, createProduct)
     .post("/create-cart", createCart)
-    // .post("/payment", productPayment)
     .delete("/delete-from-cart/:cartID", deleteFromCart)
     .delete("/delete-from-wish_list/:wishListID", deleteFromWishList)
     .delete("/delete-product/:productID", isAdmin, deleteProductById)

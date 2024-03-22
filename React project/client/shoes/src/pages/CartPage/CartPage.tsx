@@ -1,29 +1,32 @@
 import { useEffect, useState } from "react";
-import { deleteFromCart, getUserCart, payment } from "../../API/productApi";
+import { deleteFromCart, getUserCart } from "../../API/productApi";
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CartPage.scss"
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { userSelector } from "../../features/userSlice";
+import { getUserApi } from "../../features/userAPI";
 
 
 
 
 const CartPage = () => {
-    // const KEY = process.env.P_KEY;
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(userSelector)
     const [cart, setCart] = useState<Cart[]>()
-    // const [amount, setAmount] = useState()
     const hendeleDelete = async (cartID: number) => {
         try {
             const data = await deleteFromCart(cartID)
-
+            window.location.reload();
         } catch (error) {
             console.error(error)
         }
     }
 
 
-    const getCart = async (num: number) => {
+    const getCart = async () => {
         try {
-            const data = await getUserCart(num)
+            const data = await getUserCart((user.user_id))
             setCart(data)
         } catch (error) {
             console.error(error)
@@ -31,17 +34,10 @@ const CartPage = () => {
 
     };
 
-    useEffect(() => { getCart(1) }, [])
+    useEffect(() => { dispatch(getUserApi()), getCart() }, [])
 
-    // const p = ("pk_live_51Ow80Z2KjkUgMxdqBwZpNxjGpjRtft2BU4XSgdDAE821n8nGFvk0uESQti1s8VYrsCUW1moTzjifm2949vGoEyiY007LOFHivL")
-    const payNow = async () => {
-        try {
-            const data = await payment(1)
-            console.log(data)
-        } catch (error) {
-            console.error(error)
-        }
-    }
+
+
     return (
         <div>
             <h1>עגלת קניות</h1>
@@ -64,8 +60,6 @@ const CartPage = () => {
                 </div>
             }
             )}
-            {/* <button onClick={() => payNow()}>שלם</button>
-            */}
         </div>
     )
 }

@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react"
 import { getRightShoe } from "../../API/productApi"
 import ShoesGallery from "../../components/shoesGallery/ShoesGallery"
-import { useAppSelector } from "../../app/hooks"
-import { userSelector } from "../../features/userSlice"
 import './HomePage.scss'
 
 
 const homePage = () => {
-    const [right, setRight] = useState<object[]>()
-    const user = useAppSelector(userSelector)
+    const [right, setRight] = useState<ShoeProps[]>()
     const getAllRightProduct = async () => {
         try {
             const data = await getRightShoe()
@@ -22,8 +19,10 @@ const homePage = () => {
 
     return (
         <div className="home">
-            {right?.map((right) => <ShoesGallery productID={right.product_id} img={right.right_shoe} productName={right.product_name
-            } price={right.price} />)}</div>
+            {right?.map((right) => <div key={right.product_id}>{<ShoesGallery productID={right.product_id} img={right.right_shoe} productName={right.product_name
+            } price={right.price} />}</div>
+            )}
+        </div>
     )
 }
 

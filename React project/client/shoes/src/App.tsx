@@ -33,8 +33,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/terms_of_use" element={<TermsOfUsePage />} />
           <Route path="/terms" element={<TermsPage />} />
-          <Route path="*" element={<ErrorPage />} />
-          {/* <Route path="/*" element={<p>Page 404</p>} /> */}
+          <Route path='*' element={<ErrorPage />} />
         </Routes >
         <Footer />
       </BrowserRouter>

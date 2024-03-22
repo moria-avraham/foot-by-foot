@@ -7,7 +7,7 @@ import "./ShoePage.scss"
 
 
 const ShoePage = () => {
-    const [chosenProduct, setChosenProduct] = useState([])
+    const [chosenProduct, setChosenProduct] = useState<Product[]>()
     const { id } = useParams();
 
     const ProductID = async (id: number) => {
@@ -28,9 +28,9 @@ const ShoePage = () => {
     }, [id])
 
     return (
-        <>
-            {chosenProduct?.map((product) => <ShoeCard product={product} />)}
-        </>
+        <div>
+            {chosenProduct?.map((product) => <div key={product.product_id}>{<ShoeCard product={product} />}</div>)}
+        </div>
     )
 }
 

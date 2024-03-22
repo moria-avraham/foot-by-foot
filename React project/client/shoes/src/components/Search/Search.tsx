@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 export const Search = () => {
 
     const [search, setSearch] = useState("")
-    const [filterSearch, setFiltersearch] = useState<product[]>()
+    const [filterSearch, setFiltersearch] = useState<Product[]>()
 
     const AllProduct = async () => {
         try {

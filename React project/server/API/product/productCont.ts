@@ -66,7 +66,7 @@ export async function getProductById(req: express.Request, res: express.Response
 export async function getSizeByIdProduct(req: express.Request, res: express.Response) {
     try {
         const id = req.params.id;
-        if (!id) throw new Error("no Id");
+        if (!id) throw new Error("no Id in getSizeByIdProduct function");
         const query = `SELECT * FROM shoes_schema.sizes where sizes.product_id=${id};`;
         connection.query(query, (err, results) => {
             try {
@@ -87,7 +87,7 @@ export async function getSizeByIdProduct(req: express.Request, res: express.Resp
 export async function getProductFilter(req: express.Request, res: express.Response) {
     try {
         const filter = req.params.filter;
-        if (!filter) throw new Error("no filter on getProductFilter");
+        if (!filter) throw new Error("no filter on getProductFilter function");
         const query = `SELECT * 
     FROM shoes_schema.images 
     INNER JOIN shoes_schema.product 
@@ -141,7 +141,7 @@ export async function createProduct(req: express.Request, res: express.Response)
 export async function deleteProductById(req: express.Request, res: express.Response) {
     try {
         const { productID } = req.params;
-        if (!productID) throw new Error("no id on deleteProductById")
+        if (!productID) throw new Error("no id on deleteProductById function")
         const query = `DELETE FROM images WHERE product_id = ${productID};`;
         connection.query(query, (err, results) => {
             try {
@@ -171,7 +171,7 @@ export async function deleteProductById(req: express.Request, res: express.Respo
 export async function updateProductById(req: express.Request, res: express.Response) {
     try {
         const { productID } = req.params;
-        if (!productID) throw new Error("no id user");
+        if (!productID) throw new Error("no id in updateProductById function");
         const { company, price, consumer, name, description, right, left, together, back, } = req.body;
         if (!company || !price || !consumer || !name || !description || !right || !left || !together || !back) throw new Error("no field or update ");
         const query = `UPDATE product, images  SET product.company = '${company}', product.price = '${price}' , product.consumer = '${consumer}' , product.product_name = '${name}' , product.description = '${description}' , images.right_shoe = '${right}' , images.left_shoe = '${left}' , images.together = '${together}' , images.back = '${back}' WHERE product.product_id = images.product_id AND product.product_id='${productID}';`;
@@ -193,7 +193,7 @@ export async function updateProductById(req: express.Request, res: express.Respo
 export async function getSearch(req: express.Request, res: express.Response) {
     try {
         const { search } = req.params;
-        if (!search) throw new Error("no data fot search ");
+        if (!search) throw new Error("no data fot search getSearch function");
         const query = `SELECT * 
     FROM shoes_schema.images 
     INNER JOIN shoes_schema.product 
@@ -217,7 +217,7 @@ export async function getSearch(req: express.Request, res: express.Response) {
 export async function getCartById(req: express.Request, res: express.Response) {
     try {
         const userID = req.params.userID;
-        if (!userID) throw new Error("no Id");
+        if (!userID) throw new Error("no Id in getCartById function");
         const query = `SELECT * FROM cart
 JOIN product ON product.product_id = cart.prouct_id
 JOIN images ON images.product_id = cart.prouct_id where cart.user_id=${userID}; `;
@@ -241,7 +241,7 @@ JOIN images ON images.product_id = cart.prouct_id where cart.user_id=${userID}; 
 export async function deleteFromCart(req: express.Request, res: express.Response) {
     try {
         const { cartID } = req.params;
-        if (!cartID) throw new Error("no id on deleteFromCart")
+        if (!cartID) throw new Error("no id on deleteFromCart function")
         const query = `DELETE FROM cart WHERE cart_id = ${cartID};`;
         connection.query(query, (err, results) => {
             try {
@@ -261,7 +261,7 @@ export async function deleteFromCart(req: express.Request, res: express.Response
 export async function getWishList(req: express.Request, res: express.Response) {
     try {
         const userID = req.params.userID;
-        if (!userID) throw new Error("no Id");
+        if (!userID) throw new Error("no Id in getWishList function");
         const query = `SELECT * FROM wish_list
 JOIN product ON product.product_id = wish_list.product_id
 JOIN images ON images.product_id = wish_list.product_id where wish_list.user_id=${userID};`;
@@ -283,7 +283,7 @@ JOIN images ON images.product_id = wish_list.product_id where wish_list.user_id=
 export async function addWishList(req: express.Request, res: express.Response) {
     try {
         const { productID, userID } = req.body;
-        if (!userID || !productID) throw new Error("no Id");
+        if (!userID || !productID) throw new Error("Not enough data for addWishList function");
         const query = `INSERT INTO shoes_schema.wish_list(product_id, user_id) VALUES ('${productID}', '${userID}');`;
         connection.query(query, (err, results) => {
             try {
@@ -304,7 +304,7 @@ export async function deleteFromWishList(req: express.Request, res: express.Resp
     try {
         const { wishListID } = req.params;
 
-        if (!wishListID) throw new Error("no id on deleteFromCart")
+        if (!wishListID) throw new Error("no id on deleteFromWishList function")
         const query = `DELETE FROM wish_list WHERE wish_list.id = ${wishListID};`;
         connection.query(query, (err, results) => {
             try {
@@ -324,7 +324,7 @@ export async function deleteFromWishList(req: express.Request, res: express.Resp
 export async function createCart(req: express.Request, res: express.Response) {
     try {
         const { productID, userID, size } = req.body;
-        if (!productID || !userID || !size) throw new Error("no ");
+        if (!productID || !userID || !size) throw new Error("Not enough data for createCart function ");
         const query = `INSERT INTO cart (prouct_id, user_id ,size) VALUES ('${productID}', '${userID}', '${size}');`;
         connection.query(query, (err, results) => {
             try {

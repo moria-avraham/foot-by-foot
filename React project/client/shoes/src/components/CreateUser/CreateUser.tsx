@@ -7,14 +7,11 @@ const CreateUser = () => {
     const [userEmail, setUserEmail] = useState("");
     const [password, setpassword] = useState("");
 
-    const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async () => {
         try {
-            ev.preventDefault();
             if (userEmail && password && fullName && phoneNumber) {
                 const data = await createUser(userEmail, password, fullName, phoneNumber)
-                console.log(data)
             }
-
 
         } catch (error) {
             console.error(error)

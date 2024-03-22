@@ -30,7 +30,7 @@ export async function createUser(req: express.Request, res: express.Response) {
     try {
 
         const { userEmail, password, fullName, phoneNumber } = req.body;
-        if (!userEmail || !password || !fullName || !phoneNumber) throw new Error("Please complete all fields in register")
+        if (!userEmail || !password || !fullName || !phoneNumber) throw new Error("Not enough data for createUser function")
         const hash = await bcrypt.hash(password, saltRounds)
 
         const query = `INSERT INTO users (user_full_name, user_email, user_password, user_phone) VALUES ('${fullName}','${userEmail}','${hash}','${phoneNumber}');`;
@@ -163,9 +163,9 @@ export function deleteUserById(req: express.Request, res: express.Response) {
 export function updateUserById(req: express.Request, res: express.Response) {
     try {
         const { userID } = req.params;
-        if (!userID) throw new Error("no id user");
+        if (!userID) throw new Error("No id in updateUserById function");
         const { userName, userEmeil, userPhone, userRole } = req.body;
-        if (!userName || !userEmeil || !userPhone || !userRole) throw new Error("no field or update ");
+        if (!userName || !userEmeil || !userPhone || !userRole) throw new Error("no field or update in updateUserById function");
         const query = `UPDATE users SET user_full_name = '${userName}', user_email = '${userEmeil}',  user_phone = '${userPhone}' ,role = '${userRole}' WHERE (user_id = '${userID}');`;
         connection.query(query, (err, results) => {
             try {
