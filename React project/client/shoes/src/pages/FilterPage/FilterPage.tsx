@@ -5,7 +5,7 @@ import ShoesGallery from '../../components/shoesGallery/ShoesGallery';
 import "./FilterPage.scss"
 
 const FilterPage = () => {
-    const [filtered, setFiltered] = useState([])
+    const [filtered, setFiltered] = useState<ShoeProps[]>()
     const { filter } = useParams();
     const handleClick = async (filter: string | undefined) => {
         try {

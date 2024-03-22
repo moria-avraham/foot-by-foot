@@ -4,10 +4,8 @@ import UpdateProduct from "../UpdateProduct/UpdateProduct"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
-interface ShoeCardProp {
-    product: product
-}
-const ShowProduct: FC<ShoeCardProp> = ({ product }) => {
+
+const ShowProduct: FC<ProductProps> = ({ product }) => {
     const [selectedProduct, setSelectedProduct] = useState(false)
 
     const handleDelete = async (productID: number) => {

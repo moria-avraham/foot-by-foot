@@ -18,12 +18,14 @@ const Register = () => {
             ev.preventDefault();
             if (userEmail && password && fullName && phoneNumber) {
                 const data = await createUser(userEmail, password, fullName, phoneNumber)
+                console.log(data)
                 setComments("")
                 if (data?.status == 207) {
                     setComments("This address or the phone is already taken")
                 } else if (data?.data.ok == true) {
                     navigate(`/login`)
                 }
+                console.log(data)
             }
             else {
                 setComments("Please fill out all the necessary fields")

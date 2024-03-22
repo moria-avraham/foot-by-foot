@@ -3,14 +3,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import "./ShoeCard.scss"
 import { addToCart, addToWishList, getProductSize } from "../../API/productApi"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
+import { userSelector } from "../../features/userSlice"
+import { getUserApi } from "../../features/userAPI"
 
 
 
 
-const ShoeCard: FC<productProps> = ({ product }) => {
+const ShoeCard: FC<ProductProps> = ({ product }) => {
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(userSelector)
     const [selectedImage, setSelectedImage] = useState<string | undefined>((product.right_shoe))
-    const [selectedSize, setSelectedSize] = useState<number | null>()
-    const [sizes, setSizes] = useState([])
+    const [selectedSize, setSelectedSize] = useState<number>(0)
+    const [sizes, setSizes] = useState<Size[]>()
     const getSize = async (id: number) => {
         try {
             const data = await getProductSize(id)
@@ -20,17 +25,18 @@ const ShoeCard: FC<productProps> = ({ product }) => {
         }
 
     };
-    useEffect(() => { getSize(product.product_id) }, [])
+    useEffect(() => { getSize(product.product_id), dispatch(getUserApi()) }, [])
     const handleClick = async (productID: number) => {
         try {
-            const data = await addToWishList(productID, 1)
+            const data = await addToWishList(productID, (user.user_id))
         } catch (error) {
             console.error(error)
         }
     }
-    const addCart = async (productID: number, userID: number, size: number) => {
+    const addCart = async (productID: number, size: number) => {
         try {
-            const data = await addToCart(productID, userID, size)
+            const data = await addToCart(productID, (user.user_id), size)
+
         } catch (error) {
             console.error(error)
         }
@@ -44,11 +50,11 @@ const ShoeCard: FC<productProps> = ({ product }) => {
                 <div className="img_description">
                     <img width={50} src={product.right_shoe} />
                     <p className="text_description" >{product.description}</p>
-                    <div className="sizes">{sizes.map((size) => <button onClick={() => setSelectedSize((size.size))} className="size">{size.size} </button>)}</div>
+                    <div className="sizes">{sizes?.map((size) => <button key={product.product_id} onClick={() => setSelectedSize((size.size))} className="size">{size.size} </button>)}</div>
                 </div>
                 <p>? DREAM CARD חברי מועדון  </p>
                 <p> ברכישת מוצר זה ניתן לצבור כ 64 נק'</p>
-                <button onClick={() => addCart(product.product_id, 1, selectedSize)}>הוסף לעגלה</button>
+                <button onClick={() => addCart(product.product_id, selectedSize)}>הוסף לעגלה</button>
                 <button>קניה מהירה</button>
             </div>
             <div className="imges">

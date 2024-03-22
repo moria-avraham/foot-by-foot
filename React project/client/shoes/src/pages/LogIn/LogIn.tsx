@@ -27,11 +27,10 @@ const LogIn = () => {
                     navigate("/")
                 } else if ((user.role) == "admin") {
                     navigate("/admin")
-                } else if ((user)) {
-
-                    console.log("first")
                 }
-
+                if (data.response.status == 401) {
+                    setComments("incorrect email or password")
+                }
 
             } else {
                 setComments("Please fill out all the necessary fields")
@@ -53,9 +52,9 @@ const LogIn = () => {
                 <p>email:</p><input type="email" onInput={(ev) => { setuserEmail((ev.target as HTMLInputElement).value) }} />
 
                 <p>password:</p><input type="password" onInput={(ev) => { setpassword((ev.target as HTMLInputElement).value) }} />
-                <br />
+
                 <div className="comments">{comments}</div>
-                <br />
+
                 <button type="submit">Login</button>
                 <p>אם עדיין לא נרשמת הרשם <Link to={"/register"}>כאן</Link></p>
             </form>

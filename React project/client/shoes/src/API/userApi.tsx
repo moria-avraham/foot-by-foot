@@ -22,7 +22,7 @@ export const getLoginUser = async () => {
 
 export const createUser = async (userEmail: string, password: string, fullName: string, phoneNumber: number) => {
     try {
-        if (!userEmail || !password || !fullName || !phoneNumber) throw new Error("Not enough data for register");
+        if (!userEmail || !password || !fullName || !phoneNumber) throw new Error("Not enough data for createUser function");
 
         return await axios.post("api/users/register", { userEmail, password, fullName, phoneNumber })
     } catch (error) {
@@ -33,12 +33,9 @@ export const createUser = async (userEmail: string, password: string, fullName: 
 
 export const loginUser = async (email: string, password: string) => {
     try {
-        if (!email || !password) {
-            throw new Error("Not enough data for log in");
-        }
-
+        if (!email || !password) throw new Error("Not enough data for login function");
         const response = await axios.post("api/users/logIn", { email, password })
-        return response;
+        return response.data;
     } catch (error) {
         console.error("Error fetching data from the API", error);
         return error;
@@ -47,7 +44,7 @@ export const loginUser = async (email: string, password: string) => {
 
 export const deleteUser = async (userID: number) => {
     try {
-        if (!userID) throw new Error("No id in deleteProcuct ");
+        if (!userID) throw new Error("Not enough data for deleteProcuct function");
         const response = await axios.delete(`/api/users/delete-user/${userID}`
         );
         return response.data;
@@ -59,9 +56,7 @@ export const deleteUser = async (userID: number) => {
 
 export const updateUserBYID = async (userName: string, userEmeil: string, userPhone: number, userRole: string, userID: number) => {
     try {
-        if (!userName || !userEmeil || !userPhone || !userRole || !userID) {
-            throw new Error("Not enough data for log in");
-        }
+        if (!userName || !userEmeil || !userPhone || !userRole || !userID) throw new Error("Not enough data for updateUserBYID function");
         return await axios.patch(`api/users/update-user/${userID}`, { userName, userEmeil, userPhone, userRole })
 
     } catch (error) {

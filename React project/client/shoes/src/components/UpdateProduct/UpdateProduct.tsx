@@ -1,9 +1,7 @@
 import { FC, useState } from "react";
 import { updateProduct } from "../../API/productApi";
-interface props {
-    product: product
-}
-const UpdateProduct: FC<props> = ({ product }) => {
+
+const UpdateProduct: FC<ProductProps> = ({ product }) => {
     const [company, setCompany] = useState((product.company))
     const [price, setPrice] = useState(Number(product.price))
     const [consumer, setConsumer] = useState((product.consumer));
@@ -16,10 +14,10 @@ const UpdateProduct: FC<props> = ({ product }) => {
 
     const handleUpdate = async (company: string, price: number, consumer: string, name: string, description: string, right: string, left: string, together: string, back: string, productID: number) => {
         try {
-            // ev.preventDefault();
+
             if (company && price && consumer && name && description && right && left && together && back && productID) {
                 const data = await updateProduct(company, price, consumer, name, description, right, left, together, back, productID)
-                console.log(data)
+
             }
         } catch (error) {
             console.error(error)

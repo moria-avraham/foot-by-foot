@@ -24,16 +24,8 @@ const AdminPage = () => {
 
     useEffect(() => {
         dispatch(getUserApi())
-
     }, [])
-    // useEffect(() => {
-    //     if ((user.role) == "client" || (user.role) == "") {
-    //         navigate("/")
-    //     } else {
-    //         navigate("/admin")
-    //     }
 
-    // }, [])
 
     const getData = async () => {
         try {
