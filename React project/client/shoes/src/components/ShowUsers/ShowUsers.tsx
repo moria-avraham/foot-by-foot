@@ -12,6 +12,8 @@ const ShowUsers: FC<UserProps> = ({ user }) => {
         try {
             if (userID) {
                 const data = await deleteUser(userID)
+                window.location.reload();
+
             }
         } catch (error) {
             console.error(error)
@@ -31,6 +33,7 @@ const ShowUsers: FC<UserProps> = ({ user }) => {
 
             {selectedUser ? <UpdateUser user={user} /> : false}
         </div>
+
     )
 }
 

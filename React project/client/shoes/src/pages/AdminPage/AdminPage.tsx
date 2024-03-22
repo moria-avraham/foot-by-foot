@@ -15,16 +15,19 @@ const AdminPage = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const user = useAppSelector(userSelector)
-    const [users, setUsers] = useState([])
-    const [products, setProduct] = useState([])
+    const [users, setUsers] = useState<User[]>()
+    const [products, setProduct] = useState<Product[]>([])
     const [createUser, setCreateUser] = useState(false)
     const [createProduct, setCreateProduct] = useState(false)
 
 
 
-    useEffect(() => {
-        dispatch(getUserApi())
-    }, [])
+    useEffect(() => { dispatch(getUserApi()), getData() }, [])
+    // useEffect(() => {
+    //     if ((user.role) == ! "admin") {
+    //         navigate("/")
+    //     }
+    // }, [(user)])
 
 
     const getData = async () => {
@@ -37,7 +40,7 @@ const AdminPage = () => {
             console.error(error)
         }
     }
-    useEffect(() => { getData() }, [])
+    // useEffect(() => { getData() }, [])
     return (
         <div className="admin">
             <button className="create" onClick={() => setCreateUser(true)}>create a new User</button>
@@ -54,7 +57,7 @@ const AdminPage = () => {
             </ thead>
             <table>
                 <tr>
-                    {users.map((user) => <ShowUsers user={user} />)}
+                    {users?.map((user) => <ShowUsers user={user} key={user.user_id} />)}
                 </tr>
 
             </table>
@@ -73,7 +76,7 @@ const AdminPage = () => {
             </ thead>
             <table>
                 <tr>
-                    {products.map((product) => <ShowProduct product={product} />)}
+                    {products?.map((product) => <ShowProduct product={product} key={product.product_id} />)}
                 </tr>
             </table>
 

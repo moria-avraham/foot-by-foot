@@ -34,7 +34,7 @@ const CartPage = () => {
 
     };
 
-    useEffect(() => { dispatch(getUserApi()), getCart() }, [])
+    useEffect(() => { dispatch(getUserApi()), getCart() }, [(user)])
 
 
 

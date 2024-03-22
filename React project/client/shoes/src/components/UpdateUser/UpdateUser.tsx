@@ -11,6 +11,8 @@ const UpdateUser: FC<UserProps> = ({ user }) => {
         try {
             if (userName && userEmeil && userPhone && userRole && userID) {
                 const data = await updateUserBYID(userName, userEmeil, userPhone, userRole, userID)
+                window.location.reload();
+
             }
         } catch (error) {
             console.error(error)
