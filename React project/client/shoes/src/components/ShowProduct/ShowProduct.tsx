@@ -25,7 +25,7 @@ const ShowProduct: FC<ProductProps> = ({ product }) => {
             <td>{product.price}</td>
             <td> {product.consumer}</td>
             <td>{product.company}</td>
-            <td>{product.description}</td>
+            <td className="description">{product.description}</td>
             <td>{product.product_name}</td>
             <td><img src={product.right_shoe} /></td>
 

@@ -10,7 +10,7 @@ router
     .get("/get-right-shoe", getRightShoe)
     .get("/get-Product/:id", getProductById)
     .get("/get-size/:id", getSizeByIdProduct)
-    .get("/get-all-prodct", getAllProduct)
+    .get("/get-all-prodct", isAdmin, getAllProduct)
     .get("/get-Product-filter/:filter", getProductFilter)
     .get("/get-search/:search", getSearch)
     .get("/get-Product-Cart/:userID", getCartById)

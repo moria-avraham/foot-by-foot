@@ -1,8 +1,8 @@
  .filter {
      width: 90vw;
-     margin: 100px;
+     margin: 100px auto;
      display: grid;
-     grid-template-columns: repeat(6, 250px);
+     grid-template-columns: repeat(5, 250px);
      align-items: center;
      justify-content: center;
      gap: 1rem;

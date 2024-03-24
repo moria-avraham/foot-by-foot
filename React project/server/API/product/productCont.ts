@@ -343,27 +343,3 @@ export async function createCart(req: express.Request, res: express.Response) {
 }
 
 
-
-// export async function productPayment(req: express.Request, res: express.Response) {
-//     try {
-//         const { userID } = req.body;
-//         if (!userID) throw new Error("no Id");
-//         const query = `SELECT * FROM cart JOIN product ON product.product_id = cart.prouct_id where cart.user_id=${userID}; `;
-//         connection.query(query, async (err, results) => {
-//             try {
-//                 if (err) throw err;
-
-
-
-
-//             } catch (error) {
-//                 console.error(error);
-//                 res.status(500).send({ ok: false, error });
-//             }
-//         });
-
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send({ ok: false, error });
-//     }
-// }

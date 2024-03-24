@@ -19,6 +19,7 @@ const ShowUsers: FC<UserProps> = ({ user }) => {
             console.error(error)
         }
     }
+
     return (
         <div >
             <td> {user.user_id}</td>
