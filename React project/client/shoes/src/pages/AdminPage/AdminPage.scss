@@ -4,7 +4,6 @@
     .create {
         background-color: white;
         border: black solid 2px;
-
         margin: 30px;
 
     }
@@ -18,14 +17,20 @@
         margin: 40px;
         border-collapse: collapse;
 
+        td.description {
+            width: 20vw;
+            padding-right: 10px;
+        }
+
         td {
             border-top: 1px solid black;
             height: -0.5px;
-            width: 10vw;
+            width: 11vw;
+
 
             img {
                 padding: 10px;
-                width: 60px;
+                width: 50px;
             }
         }
     }

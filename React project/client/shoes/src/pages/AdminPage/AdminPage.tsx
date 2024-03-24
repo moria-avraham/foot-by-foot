@@ -22,16 +22,14 @@ const AdminPage = () => {
 
 
 
-    useEffect(() => { dispatch(getUserApi()), getData() }, [])
-    // useEffect(() => {
-    //     if ((user.role) == ! "admin") {
-    //         navigate("/")
-    //     }
-    // }, [(user)])
+    useEffect(() => {
+        getData(), dispatch(getUserApi())
+    }, [(user)])
 
 
     const getData = async () => {
         try {
+
             const data = await getAllUser()
             setUsers(data)
             const results = await getAllProduct()
@@ -40,7 +38,7 @@ const AdminPage = () => {
             console.error(error)
         }
     }
-    // useEffect(() => { getData() }, [])
+
     return (
         <div className="admin">
             <button className="create" onClick={() => setCreateUser(true)}>create a new User</button>

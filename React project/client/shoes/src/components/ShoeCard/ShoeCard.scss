@@ -14,7 +14,7 @@ body {
         .description {
             text-align: center;
             width: 50%;
-
+            margin-bottom: 35px;
 
 
             .img_description {
@@ -26,14 +26,19 @@ body {
                 justify-content: end;
 
                 .size {
-                    display: block;
+                    display: flex;
                     background-color: rgba(128, 128, 128, 0.098);
                     color: rgb(79, 79, 79);
                     text-align: center;
+                    justify-content: center;
                     width: 30px;
-                    height: 30px;
+                    height: 40px;
                     margin: 5px;
+
                 }
+
+
+
             }
         }
 
