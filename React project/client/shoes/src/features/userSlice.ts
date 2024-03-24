@@ -3,7 +3,7 @@ import { RootState } from "@reduxjs/toolkit/query";
 import { getUserApi } from "./userAPI";
 
 export interface userState {
-    value: user
+    value: User
     status: 'idle' | 'loading' | 'failed'
 }
 

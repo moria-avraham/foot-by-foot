@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom"
 import './header.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons'
 import { Search } from "../Search/Search"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
@@ -34,6 +34,9 @@ const Header = () => {
                     <FontAwesomeIcon icon={faHeart} style={{ color: "white" }} /></Link>
                 <Link to={"/cart"}>
                     <FontAwesomeIcon icon={faCartShopping} style={{ color: "white" }} /></Link>
+                {user.role == "admin" ? <Link to={"/admin"}>
+                    <FontAwesomeIcon icon={faUser} style={{ color: "white" }} /></Link> : null}
+
             </div>
 
             {(user.user_id) == 0 ? <><NavLink to={"login"}>התחבר/י</NavLink></> : <p>  ,{(user.user_full_name)} שלום</p>}

@@ -1,35 +1,40 @@
 import { useEffect, useState } from "react"
 import { getAllProduct } from "../../API/productApi"
 import { getAllUser } from "../../API/userApi"
+import CreateProduct from "../../components/CreateProduct/CreateProduct"
+import CreateUser from "../../components/CreateUser/CreateUser"
 import ShowProduct from "../../components/ShowProduct/ShowProduct"
 import ShowUsers from "../../components/ShowUsers/ShowUsers"
-import CreateProduct from "../../components/CreateProduct/CreateProduct"
 import "./AdminPage.scss"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { getUserApi } from "../../features/userAPI"
-import { userSelector } from "../../features/userSlice"
-import CreateUser from "../../components/CreateUser/CreateUser"
+import { userSelector, userStateSelector } from "../../features/userSlice"
 import { useNavigate } from "react-router"
+import { getUserApi } from "../../features/userAPI"
+import UserTRTable from "../../components/UserTRTable/UserTRTable"
+import ProductTRTable from "../../components/ProductTRTable/ProductTRTable"
 
 const AdminPage = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const user = useAppSelector(userSelector)
+    const status = useAppSelector(userStateSelector)
     const [users, setUsers] = useState<User[]>()
-    const [products, setProduct] = useState<Product[]>([])
+    const [products, setProduct] = useState<Product[]>()
     const [createUser, setCreateUser] = useState(false)
     const [createProduct, setCreateProduct] = useState(false)
 
-
-
+    useEffect(() => { dispatch(getUserApi()) }, [])
     useEffect(() => {
-        getData(), dispatch(getUserApi())
-    }, [(user)])
+        if (((user.role) !== "" && (user.role) !== "admin" && (status) == "idle") || (status) == "failed") {
+            navigate("/")
+        }
+
+    }, [(status)])
 
 
+    useEffect(() => { getData() }, [])
     const getData = async () => {
         try {
-
             const data = await getAllUser()
             setUsers(data)
             const results = await getAllProduct()
@@ -43,39 +48,23 @@ const AdminPage = () => {
         <div className="admin">
             <button className="create" onClick={() => setCreateUser(true)}>create a new User</button>
             {createUser ? <CreateUser /> : null}
-            <thead>
-                <tr>
-                    <th >user ID</th>
-                    <th>user name</th>
-                    <th>user emeil</th>
-                    <th>user phone</th>
-                    <th>role</th>
-                    <th></th>
-                </tr>
-            </ thead>
-            <table>
-                <tr>
-                    {users?.map((user) => <ShowUsers user={user} key={user.user_id} />)}
-                </tr>
 
+            <UserTRTable />
+
+            <table>
+                <tbody>
+                    {users?.map((user) => <ShowUsers key={user.user_id} user={user} />)}
+                </tbody>
             </table>
             <button className="create" onClick={() => setCreateProduct(true)}>create a new Product</button>
             {createProduct ? <CreateProduct /> : null}
-            <thead>
-                <tr>
-                    <th className="product" >product ID</th>
-                    <th className="product" >price</th>
-                    <th className="product" >company product </th>
-                    <th className="product" >consumer</th>
-                    <th className="product" >description</th>
-                    <th className="product" >Product name</th>
-                    <th className="product" >Product image</th>
-                </tr>
-            </ thead>
+
+            <ProductTRTable />
+
             <table>
-                <tr>
-                    {products?.map((product) => <ShowProduct product={product} key={product.product_id} />)}
-                </tr>
+                <tbody>
+                    {products?.map((product) => <ShowProduct key={product.product_id} product={product} />)}
+                </tbody>
             </table>
 
         </div>

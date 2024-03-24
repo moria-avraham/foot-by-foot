@@ -21,7 +21,8 @@ const ShowUsers: FC<UserProps> = ({ user }) => {
     }
 
     return (
-        <div >
+
+        <tr>
             <td> {user.user_id}</td>
             <td>{user.user_full_name}</td>
             <td>{user.user_email}</td>
@@ -33,7 +34,7 @@ const ShowUsers: FC<UserProps> = ({ user }) => {
             </td>
 
             {selectedUser ? <UpdateUser user={user} /> : false}
-        </div>
+        </tr>
 
     )
 }

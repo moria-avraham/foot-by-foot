@@ -8,8 +8,18 @@
 
     }
 
-    th {
-        width: 10.5vw;
+    tr.title {
+        width: 11vw;
+        border-top: none;
+
+    }
+
+    tr.title_product {
+        width: 85vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
     }
 
     table {
@@ -20,6 +30,11 @@
         td.description {
             width: 20vw;
             padding-right: 10px;
+        }
+
+        td.title {
+            border-top: none;
+            font-weight: bolder;
         }
 
         td {

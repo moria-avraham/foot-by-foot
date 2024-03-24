@@ -20,7 +20,8 @@ const ShowProduct: FC<ProductProps> = ({ product }) => {
         }
     }
     return (
-        <div >
+
+        <tr >
             <td> {product.product_id}</td>
             <td>{product.price}</td>
             <td> {product.consumer}</td>
@@ -35,7 +36,7 @@ const ShowProduct: FC<ProductProps> = ({ product }) => {
             </td>
 
             {selectedProduct ? <UpdateProduct product={product} /> : false}
-        </div>
+        </tr>
 
     )
 }
