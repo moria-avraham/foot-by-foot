@@ -27,8 +27,8 @@ export const Search = () => {
 
 
     return (
-        <div ><input className="input_search" type="text" placeholder='Search' onInput={(ev) => setSearch((ev.target as HTMLInputElement).value)} />
-            {filterSearch ? <div className="search">{filterSearch.map((filter) => <Link to={`/${filter.product_id}`} key={filter.product_id} className="search_info">
+        <div ><input className="input_search" type="text" placeholder='Search' onInput={(ev) => setSearch((ev.target as HTMLInputElement).value)} value={search} />
+            {filterSearch ? <div className="search">{filterSearch.map((filter) => <Link onClick={() => setSearch("")} to={`/${filter.product_id}`} key={filter.product_id} className="search_info">
                 <div>
                     <p>{filter.product_name}</p>
                     <p>₪{filter.price}</p>
