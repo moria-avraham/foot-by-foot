@@ -13,6 +13,8 @@ import TermsPage from "./pages/info/TermsPage"
 import WishList from "./pages/WishList/WishList"
 import CartPage from "./pages/CartPage/CartPage"
 import ErrorPage from "./pages/ErrorPage/ErrorPage"
+import PaymentSuccess from "./pages/Payment/PaymentSuccess"
+import FailedToPay from "./pages/Payment/FailedToPay"
 
 function App() {
 
@@ -33,6 +35,8 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/terms_of_use" element={<TermsOfUsePage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/Failed_to_pay" element={<FailedToPay />} />
+          <Route path="/Payment_success" element={<PaymentSuccess />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes >
         <Footer />

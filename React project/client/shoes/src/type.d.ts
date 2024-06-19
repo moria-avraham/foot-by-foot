@@ -55,6 +55,9 @@ type Cart = {
     product_name: string,
     right_shoe: string
 }
+type CartProps = {
+    cart: Cart[]
+}
 
 type Size = {
     size: number
