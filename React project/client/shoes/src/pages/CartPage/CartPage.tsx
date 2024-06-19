@@ -6,6 +6,8 @@ import "./CartPage.scss"
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { userSelector } from "../../features/userSlice";
 import { getUserApi } from "../../features/userAPI";
+import Payment from "../../components/Payment/Payment";
+
 
 
 
@@ -58,9 +60,12 @@ const CartPage = () => {
 
                     <img src={cart.right_shoe} width={150} />
 
+
                 </div>
             }
             )}
+
+            {cart && cart.length > 0 ? <Payment cart={cart} /> : 'Cart is empty'}
         </div>
     )
 }

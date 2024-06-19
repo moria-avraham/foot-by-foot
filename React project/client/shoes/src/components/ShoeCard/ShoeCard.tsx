@@ -6,6 +6,8 @@ import { addToCart, addToWishList, getProductSize } from "../../API/productApi"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { userSelector } from "../../features/userSlice"
 import { getUserApi } from "../../features/userAPI"
+import Payment from "../Payment/Payment"
+
 
 
 
@@ -55,7 +57,7 @@ const ShoeCard: FC<ProductProps> = ({ product }) => {
                 <p>? DREAM CARD חברי מועדון  </p>
                 <p> ברכישת מוצר זה ניתן לצבור כ 64 נק'</p>
                 <button onClick={() => addCart(product.product_id, selectedSize)}>הוסף לעגלה</button>
-                <button>קניה מהירה</button>
+                {/* <button >קניה מהירה</button> */}
             </div>
             <div className="imges">
                 <div className="bigImg" >
